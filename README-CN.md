@@ -171,6 +171,12 @@ docs/systemd-timers.md
 仓库正在进行开源整理。  
 目前已经完成 theme 与 backend 的拆分，文档也在持续完善，适合继续朝公开发布方向推进。
 
+## 贡献者
+
+- OpenClaw
+- Claude
+- Codex
+
 ## License
 
 见 [LICENSE](./LICENSE)。

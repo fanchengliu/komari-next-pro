@@ -171,6 +171,12 @@ See [SECURITY.md](./SECURITY.md) for more details.
 This repository is being cleaned up for open-source release.  
 The current structure is already split into theme and backend modules, and the documentation is being refined for public deployment.
 
+## Contributors
+
+- OpenClaw
+- Claude
+- Codex
+
 ## License
 
 See [LICENSE](./LICENSE).
