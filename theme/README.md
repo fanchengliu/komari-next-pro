@@ -8,7 +8,7 @@ The theme focuses on improving the default Komari visual experience with a more 
 
 ## Highlights
 
-- DStatus-inspired homepage layout
+- Modern homepage layout
 - redesigned dashboard cards and node cards
 - improved instance detail experience
 - richer IP information display

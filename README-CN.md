@@ -14,11 +14,12 @@ Komari Next Pro 是一个 Komari 自定义主题，并附带一个可选的 `unl
 ## 功能特性
 
 ### 主题部分
-- DStatus 风格首页与 dashboard 布局
+- 现代化主页与 dashboard 布局
 - 重做的节点卡片与详情页
 - 更丰富的 IP 信息与网络质量展示
 - 资产统计与更强的视觉表现
 - 可接入 Komari admin 的主题配置支持
+- 更好的公开展示隐私管理
 - 多语言 UI 基础
 
 ### 可选 unlock-probe 后端
@@ -28,6 +29,7 @@ Komari Next Pro 是一个 Komari 自定义主题，并附带一个可选的 `unl
 - 支持每节点卡片字段显隐配置
 - 支持定时批量检测
 - 写操作需登录，公开结果可脱敏输出
+- 对敏感解锁详情提供更适合公开访问的隐私保护展示
 
 ## 仓库结构
 
@@ -144,13 +146,25 @@ docs/systemd-timers.md
 
 ## 截图
 
-这里后续可以补：
+### 首页 dashboard
 
-- 首页
-- 节点卡片
-- 详情页
-- IP 信息页
-- 流媒体解锁面板
+![首页 dashboard](./docs/images/homepage-dashboard.jpg)
+
+### 实例状态页
+
+![实例状态页](./docs/images/instance-status.jpg)
+
+### IP 信息与流媒体解锁
+
+![IP 信息与流媒体解锁](./docs/images/ip-info-unlock.jpg)
+
+### IPv4 / IPv6 解锁结果展示
+
+![IPv4 / IPv6 解锁结果展示](./docs/images/stream-unlock-ipv6.jpg)
+
+### 卡片隐私与显示设置
+
+![卡片隐私与显示设置](./docs/images/card-privacy-settings.jpg)
 
 ## 当前状态
 

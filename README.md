@@ -14,11 +14,12 @@ You can use the theme alone, or deploy both modules together for the full experi
 ## Features
 
 ### Theme
-- DStatus-inspired homepage and dashboard layout
+- Modern homepage and dashboard layout
 - redesigned node cards and instance detail pages
 - richer IP information and network quality display
 - asset overview and more expressive visual presentation
 - Komari admin theme-managed configuration support
+- improved privacy controls for public display
 - multilingual UI base
 
 ### Optional unlock-probe backend
@@ -28,6 +29,7 @@ You can use the theme alone, or deploy both modules together for the full experi
 - per-node card field visibility configuration
 - scheduled batch probing support
 - login-protected write actions with masked public output
+- privacy-aware public result display for sensitive unlock details
 
 ## Repository Structure
 
@@ -144,13 +146,25 @@ See [SECURITY.md](./SECURITY.md) for more details.
 
 ## Screenshots
 
-You can add screenshots here later, for example:
+### Homepage dashboard
 
-- homepage
-- node cards
-- instance detail page
-- IP info / network quality page
-- stream unlock panel
+![Homepage dashboard](./docs/images/homepage-dashboard.jpg)
+
+### Instance status
+
+![Instance status](./docs/images/instance-status.jpg)
+
+### IP information and stream unlock panel
+
+![IP information and stream unlock panel](./docs/images/ip-info-unlock.jpg)
+
+### IPv4 / IPv6 unlock result display
+
+![IPv4 and IPv6 unlock display](./docs/images/stream-unlock-ipv6.jpg)
+
+### Card privacy and display settings
+
+![Card privacy settings](./docs/images/card-privacy-settings.jpg)
 
 ## Status
 
