@@ -1,0 +1,949 @@
+{
+  "name": "Komari Next Pro",
+  "short": "komari-next-pro",
+  "description": "Komari Next Pro custom theme with DStatus-style UI, asset dashboard, IP info, and stream unlock integration",
+  "version": "1.3.6-pro",
+  "author": "LIU",
+  "url": "https://github.com/fanchengliu/komari-next-pro",
+  "preview": "preview.png",
+  "configuration": {
+    "name": "主题设置",
+    "icon": "Palette",
+    "managedFields": [
+      {
+        "key": "colorTheme",
+        "type": "option",
+        "label": "默认颜色主题",
+        "options": [
+          "default",
+          "ocean",
+          "sunset",
+          "forest",
+          "midnight",
+          "rose"
+        ],
+        "default": "default"
+      },
+      {
+        "key": "backgroundImageUrl",
+        "type": "text",
+        "label": "背景图片链接",
+        "default": ""
+      },
+      {
+        "key": "logoImageUrl",
+        "type": "text",
+        "label": "Logo 图片链接",
+        "default": ""
+      },
+      {
+        "key": "footerBrandLine",
+        "type": "text",
+        "label": "Footer 品牌文案",
+        "default": "技术支持 Komari-Next and LIU"
+      },
+      {
+        "key": "statusCardsVisibility.currentTime",
+        "type": "bool",
+        "label": "显示当前时间",
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.currentOnline",
+        "type": "bool",
+        "label": "显示当前在线",
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.regionOverview",
+        "type": "bool",
+        "label": "显示点亮地区",
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.trafficOverview",
+        "type": "bool",
+        "label": "显示流量概览",
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.networkSpeed",
+        "type": "bool",
+        "label": "显示网络速率",
+        "default": true
+      },
+      {
+        "key": "streamUnlock.mode",
+        "type": "option",
+        "label": "流媒体解锁模式",
+        "options": [
+          "all",
+          "include",
+          "off"
+        ],
+        "default": "all"
+      },
+      {
+        "key": "streamUnlock.enabled",
+        "type": "bool",
+        "label": "启用流媒体解锁",
+        "default": true
+      },
+      {
+        "key": "streamUnlock.nodeMatchList",
+        "type": "text",
+        "label": "节点匹配列表（名称或 UUID）",
+        "default": ""
+      },
+      {
+        "key": "streamUnlock.autoRunDays",
+        "type": "number",
+        "label": "自动检测间隔天数",
+        "default": 5
+      },
+      {
+        "key": "streamUnlock.showIPv6",
+        "type": "bool",
+        "label": "显示 IPv6 解锁检测",
+        "default": true
+      }
+    ],
+    "description": "next-custom 主题专属设置",
+    "fields": [
+      {
+        "type": "title",
+        "name": "主题设置"
+      },
+      {
+        "key": "colorTheme",
+        "type": "select",
+        "name": {
+          "zh-CN": "默认颜色主题",
+          "en-US": "Default Color Theme"
+        },
+        "help": {
+          "zh-CN": "设置主题默认颜色方案",
+          "en-US": "Set the default color scheme for the theme"
+        },
+        "default": "default",
+        "options": "default,ocean,sunset,forest,midnight,rose"
+      },
+      {
+        "key": "backgroundImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "背景图片链接",
+          "en-US": "Background Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认背景图片链接",
+          "en-US": "Default background image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "logoImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "Logo 图片链接",
+          "en-US": "Logo Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认 Logo 图片链接",
+          "en-US": "Default logo image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "showAssetCalculatorButton",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产计算器按钮",
+          "en-US": "Show Asset Calculator Button"
+        },
+        "help": {
+          "zh-CN": "控制导航栏中是否显示资产计算器按钮",
+          "en-US": "Control whether the asset calculator button is shown in the navbar"
+        },
+        "default": true
+      },
+      {
+        "key": "footerBrandLine",
+        "type": "string",
+        "name": {
+          "zh-CN": "Footer 品牌文案",
+          "en-US": "Footer Brand Line"
+        },
+        "help": {
+          "zh-CN": "底栏显示的品牌文案",
+          "en-US": "Brand line shown in the footer"
+        },
+        "default": "技术支持 Komari-Next and LIU"
+      },
+      {
+        "type": "title",
+        "name": "状态卡显示"
+      },
+      {
+        "key": "statusCardsVisibility.currentTime",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前时间",
+          "en-US": "Show Current Time"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.currentOnline",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前在线",
+          "en-US": "Show Current Online"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.regionOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示点亮地区",
+          "en-US": "Show Region Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.trafficOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示流量概览",
+          "en-US": "Show Traffic Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.networkSpeed",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示网络速率",
+          "en-US": "Show Network Speed"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.assetOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产统计",
+          "en-US": "Show Asset Overview"
+        },
+        "default": true
+      },
+      {
+        "type": "title",
+        "name": "自定义文本"
+      },
+      {
+        "key": "customTexts",
+        "type": "custom",
+        "name": {
+          "zh-CN": "界面文案覆盖",
+          "en-US": "Custom Text Overrides"
+        },
+        "help": {
+          "zh-CN": "覆盖主题内部分文案，可留空",
+          "en-US": "Override specific theme texts, can be left empty"
+        },
+        "default": ""
+      },
+      {
+        "type": "title",
+        "name": "流媒体解锁"
+      },
+      {
+        "key": "streamUnlock.mode",
+        "type": "select",
+        "name": {
+          "zh-CN": "流媒体解锁模式",
+          "en-US": "Stream Unlock Mode"
+        },
+        "help": {
+          "zh-CN": "all=全部测试；include=只测试匹配列表里的节点；exclude=除去匹配列表里的节点，其他都测试；off=全部关闭",
+          "en-US": "all=enable all; include=only matched nodes; exclude=exclude matched nodes; off=disable all"
+        },
+        "default": "all",
+        "options": "all,include,exclude,off"
+      },
+      {
+        "key": "streamUnlock.enabled",
+        "type": "switch",
+        "name": {
+          "zh-CN": "启用流媒体解锁",
+          "en-US": "Enable Stream Unlock"
+        },
+        "default": true
+      },
+      {
+        "key": "streamUnlock.nodeMatchList",
+        "type": "string",
+        "name": {
+          "zh-CN": "节点匹配列表（名称或 UUID）",
+          "en-US": "Node Match List (Name or UUID)"
+        },
+        "help": {
+          "zh-CN": "用于 include/exclude 模式；可填写机器名称或 UUID 关键词，多个用英文逗号分隔，例如 ORACLE-SG,腾讯云。include=只测试这些；exclude=除去这些都测试",
+          "en-US": "Used by include/exclude mode; comma-separated node names or UUID keywords. include=only matched; exclude=exclude matched"
+        },
+        "default": ""
+      },
+      {
+        "key": "streamUnlock.autoRunDays",
+        "type": "number",
+        "name": {
+          "zh-CN": "自动检测间隔天数",
+          "en-US": "Auto-run interval days"
+        },
+        "help": {
+          "zh-CN": "默认 5 天；后端定时任务会使用该值（当前预留）",
+          "en-US": "Default 5 days; reserved for backend scheduler"
+        },
+        "default": 5
+      },
+      {
+        "key": "streamUnlock.showIPv6",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示 IPv6 解锁检测",
+          "en-US": "Show IPv6 Unlock Checks"
+        },
+        "default": true
+      }
+    ],
+    "options": [
+      {
+        "type": "title",
+        "name": "主题设置"
+      },
+      {
+        "key": "colorTheme",
+        "type": "select",
+        "name": {
+          "zh-CN": "默认颜色主题",
+          "en-US": "Default Color Theme"
+        },
+        "help": {
+          "zh-CN": "设置主题默认颜色方案",
+          "en-US": "Set the default color scheme for the theme"
+        },
+        "default": "default",
+        "options": "default,ocean,sunset,forest,midnight,rose"
+      },
+      {
+        "key": "backgroundImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "背景图片链接",
+          "en-US": "Background Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认背景图片链接",
+          "en-US": "Default background image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "logoImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "Logo 图片链接",
+          "en-US": "Logo Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认 Logo 图片链接",
+          "en-US": "Default logo image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "showAssetCalculatorButton",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产计算器按钮",
+          "en-US": "Show Asset Calculator Button"
+        },
+        "help": {
+          "zh-CN": "控制导航栏中是否显示资产计算器按钮",
+          "en-US": "Control whether the asset calculator button is shown in the navbar"
+        },
+        "default": true
+      },
+      {
+        "key": "footerBrandLine",
+        "type": "string",
+        "name": {
+          "zh-CN": "Footer 品牌文案",
+          "en-US": "Footer Brand Line"
+        },
+        "help": {
+          "zh-CN": "底栏显示的品牌文案",
+          "en-US": "Brand line shown in the footer"
+        },
+        "default": "技术支持 Komari-Next and LIU"
+      },
+      {
+        "type": "title",
+        "name": "状态卡显示"
+      },
+      {
+        "key": "statusCardsVisibility.currentTime",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前时间",
+          "en-US": "Show Current Time"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.currentOnline",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前在线",
+          "en-US": "Show Current Online"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.regionOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示点亮地区",
+          "en-US": "Show Region Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.trafficOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示流量概览",
+          "en-US": "Show Traffic Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.networkSpeed",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示网络速率",
+          "en-US": "Show Network Speed"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.assetOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产统计",
+          "en-US": "Show Asset Overview"
+        },
+        "default": true
+      },
+      {
+        "type": "title",
+        "name": "自定义文本"
+      },
+      {
+        "key": "customTexts",
+        "type": "custom",
+        "name": {
+          "zh-CN": "界面文案覆盖",
+          "en-US": "Custom Text Overrides"
+        },
+        "help": {
+          "zh-CN": "覆盖主题内部分文案，可留空",
+          "en-US": "Override specific theme texts, can be left empty"
+        },
+        "default": ""
+      },
+      {
+        "type": "title",
+        "name": "流媒体解锁"
+      },
+      {
+        "key": "streamUnlock.mode",
+        "type": "select",
+        "name": {
+          "zh-CN": "流媒体解锁模式",
+          "en-US": "Stream Unlock Mode"
+        },
+        "help": {
+          "zh-CN": "all=全部测试；include=只测试匹配列表里的节点；exclude=除去匹配列表里的节点，其他都测试；off=全部关闭",
+          "en-US": "all=enable all; include=only matched nodes; exclude=exclude matched nodes; off=disable all"
+        },
+        "default": "all",
+        "options": "all,include,exclude,off"
+      },
+      {
+        "key": "streamUnlock.enabled",
+        "type": "switch",
+        "name": {
+          "zh-CN": "启用流媒体解锁",
+          "en-US": "Enable Stream Unlock"
+        },
+        "default": true
+      },
+      {
+        "key": "streamUnlock.nodeMatchList",
+        "type": "string",
+        "name": {
+          "zh-CN": "节点匹配列表（名称或 UUID）",
+          "en-US": "Node Match List (Name or UUID)"
+        },
+        "help": {
+          "zh-CN": "用于 include/exclude 模式；可填写机器名称或 UUID 关键词，多个用英文逗号分隔，例如 ORACLE-SG,腾讯云。include=只测试这些；exclude=除去这些都测试",
+          "en-US": "Used by include/exclude mode; comma-separated node names or UUID keywords. include=only matched; exclude=exclude matched"
+        },
+        "default": ""
+      },
+      {
+        "key": "streamUnlock.autoRunDays",
+        "type": "number",
+        "name": {
+          "zh-CN": "自动检测间隔天数",
+          "en-US": "Auto-run interval days"
+        },
+        "help": {
+          "zh-CN": "默认 5 天；后端定时任务会使用该值（当前预留）",
+          "en-US": "Default 5 days; reserved for backend scheduler"
+        },
+        "default": 5
+      },
+      {
+        "key": "streamUnlock.showIPv6",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示 IPv6 解锁检测",
+          "en-US": "Show IPv6 Unlock Checks"
+        },
+        "default": true
+      }
+    ],
+    "items": [
+      {
+        "type": "title",
+        "name": "主题设置"
+      },
+      {
+        "key": "colorTheme",
+        "type": "select",
+        "name": {
+          "zh-CN": "默认颜色主题",
+          "en-US": "Default Color Theme"
+        },
+        "help": {
+          "zh-CN": "设置主题默认颜色方案",
+          "en-US": "Set the default color scheme for the theme"
+        },
+        "default": "default",
+        "options": "default,ocean,sunset,forest,midnight,rose"
+      },
+      {
+        "key": "backgroundImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "背景图片链接",
+          "en-US": "Background Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认背景图片链接",
+          "en-US": "Default background image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "logoImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "Logo 图片链接",
+          "en-US": "Logo Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认 Logo 图片链接",
+          "en-US": "Default logo image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "showAssetCalculatorButton",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产计算器按钮",
+          "en-US": "Show Asset Calculator Button"
+        },
+        "help": {
+          "zh-CN": "控制导航栏中是否显示资产计算器按钮",
+          "en-US": "Control whether the asset calculator button is shown in the navbar"
+        },
+        "default": true
+      },
+      {
+        "key": "footerBrandLine",
+        "type": "string",
+        "name": {
+          "zh-CN": "Footer 品牌文案",
+          "en-US": "Footer Brand Line"
+        },
+        "help": {
+          "zh-CN": "底栏显示的品牌文案",
+          "en-US": "Brand line shown in the footer"
+        },
+        "default": "技术支持 Komari-Next and LIU"
+      },
+      {
+        "type": "title",
+        "name": "状态卡显示"
+      },
+      {
+        "key": "statusCardsVisibility.currentTime",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前时间",
+          "en-US": "Show Current Time"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.currentOnline",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前在线",
+          "en-US": "Show Current Online"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.regionOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示点亮地区",
+          "en-US": "Show Region Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.trafficOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示流量概览",
+          "en-US": "Show Traffic Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.networkSpeed",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示网络速率",
+          "en-US": "Show Network Speed"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.assetOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产统计",
+          "en-US": "Show Asset Overview"
+        },
+        "default": true
+      },
+      {
+        "type": "title",
+        "name": "自定义文本"
+      },
+      {
+        "key": "customTexts",
+        "type": "custom",
+        "name": {
+          "zh-CN": "界面文案覆盖",
+          "en-US": "Custom Text Overrides"
+        },
+        "help": {
+          "zh-CN": "覆盖主题内部分文案，可留空",
+          "en-US": "Override specific theme texts, can be left empty"
+        },
+        "default": ""
+      },
+      {
+        "type": "title",
+        "name": "流媒体解锁"
+      },
+      {
+        "key": "streamUnlock.mode",
+        "type": "select",
+        "name": {
+          "zh-CN": "流媒体解锁模式",
+          "en-US": "Stream Unlock Mode"
+        },
+        "help": {
+          "zh-CN": "all=全部测试；include=只测试匹配列表里的节点；exclude=除去匹配列表里的节点，其他都测试；off=全部关闭",
+          "en-US": "all=enable all; include=only matched nodes; exclude=exclude matched nodes; off=disable all"
+        },
+        "default": "all",
+        "options": "all,include,exclude,off"
+      },
+      {
+        "key": "streamUnlock.enabled",
+        "type": "switch",
+        "name": {
+          "zh-CN": "启用流媒体解锁",
+          "en-US": "Enable Stream Unlock"
+        },
+        "default": true
+      },
+      {
+        "key": "streamUnlock.nodeMatchList",
+        "type": "string",
+        "name": {
+          "zh-CN": "节点匹配列表（名称或 UUID）",
+          "en-US": "Node Match List (Name or UUID)"
+        },
+        "help": {
+          "zh-CN": "用于 include/exclude 模式；可填写机器名称或 UUID 关键词，多个用英文逗号分隔，例如 ORACLE-SG,腾讯云。include=只测试这些；exclude=除去这些都测试",
+          "en-US": "Used by include/exclude mode; comma-separated node names or UUID keywords. include=only matched; exclude=exclude matched"
+        },
+        "default": ""
+      },
+      {
+        "key": "streamUnlock.autoRunDays",
+        "type": "number",
+        "name": {
+          "zh-CN": "自动检测间隔天数",
+          "en-US": "Auto-run interval days"
+        },
+        "help": {
+          "zh-CN": "默认 5 天；后端定时任务会使用该值（当前预留）",
+          "en-US": "Default 5 days; reserved for backend scheduler"
+        },
+        "default": 5
+      },
+      {
+        "key": "streamUnlock.showIPv6",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示 IPv6 解锁检测",
+          "en-US": "Show IPv6 Unlock Checks"
+        },
+        "default": true
+      }
+    ],
+    "data": [
+      {
+        "type": "title",
+        "name": "主题设置"
+      },
+      {
+        "key": "colorTheme",
+        "type": "select",
+        "name": {
+          "zh-CN": "默认颜色主题",
+          "en-US": "Default Color Theme"
+        },
+        "help": {
+          "zh-CN": "设置主题默认颜色方案",
+          "en-US": "Set the default color scheme for the theme"
+        },
+        "default": "default",
+        "options": "default,ocean,sunset,forest,midnight,rose"
+      },
+      {
+        "key": "backgroundImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "背景图片链接",
+          "en-US": "Background Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认背景图片链接",
+          "en-US": "Default background image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "logoImageUrl",
+        "type": "string",
+        "name": {
+          "zh-CN": "Logo 图片链接",
+          "en-US": "Logo Image URL"
+        },
+        "help": {
+          "zh-CN": "主题默认 Logo 图片链接",
+          "en-US": "Default logo image URL for the theme"
+        },
+        "default": ""
+      },
+      {
+        "key": "showAssetCalculatorButton",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产计算器按钮",
+          "en-US": "Show Asset Calculator Button"
+        },
+        "help": {
+          "zh-CN": "控制导航栏中是否显示资产计算器按钮",
+          "en-US": "Control whether the asset calculator button is shown in the navbar"
+        },
+        "default": true
+      },
+      {
+        "key": "footerBrandLine",
+        "type": "string",
+        "name": {
+          "zh-CN": "Footer 品牌文案",
+          "en-US": "Footer Brand Line"
+        },
+        "help": {
+          "zh-CN": "底栏显示的品牌文案",
+          "en-US": "Brand line shown in the footer"
+        },
+        "default": "技术支持 Komari-Next and LIU"
+      },
+      {
+        "type": "title",
+        "name": "状态卡显示"
+      },
+      {
+        "key": "statusCardsVisibility.currentTime",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前时间",
+          "en-US": "Show Current Time"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.currentOnline",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示当前在线",
+          "en-US": "Show Current Online"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.regionOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示点亮地区",
+          "en-US": "Show Region Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.trafficOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示流量概览",
+          "en-US": "Show Traffic Overview"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.networkSpeed",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示网络速率",
+          "en-US": "Show Network Speed"
+        },
+        "default": true
+      },
+      {
+        "key": "statusCardsVisibility.assetOverview",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示资产统计",
+          "en-US": "Show Asset Overview"
+        },
+        "default": true
+      },
+      {
+        "type": "title",
+        "name": "自定义文本"
+      },
+      {
+        "key": "customTexts",
+        "type": "custom",
+        "name": {
+          "zh-CN": "界面文案覆盖",
+          "en-US": "Custom Text Overrides"
+        },
+        "help": {
+          "zh-CN": "覆盖主题内部分文案，可留空",
+          "en-US": "Override specific theme texts, can be left empty"
+        },
+        "default": ""
+      },
+      {
+        "type": "title",
+        "name": "流媒体解锁"
+      },
+      {
+        "key": "streamUnlock.mode",
+        "type": "select",
+        "name": {
+          "zh-CN": "流媒体解锁模式",
+          "en-US": "Stream Unlock Mode"
+        },
+        "help": {
+          "zh-CN": "all=全部测试；include=只测试匹配列表里的节点；exclude=除去匹配列表里的节点，其他都测试；off=全部关闭",
+          "en-US": "all=enable all; include=only matched nodes; exclude=exclude matched nodes; off=disable all"
+        },
+        "default": "all",
+        "options": "all,include,exclude,off"
+      },
+      {
+        "key": "streamUnlock.enabled",
+        "type": "switch",
+        "name": {
+          "zh-CN": "启用流媒体解锁",
+          "en-US": "Enable Stream Unlock"
+        },
+        "default": true
+      },
+      {
+        "key": "streamUnlock.nodeMatchList",
+        "type": "string",
+        "name": {
+          "zh-CN": "节点匹配列表（名称或 UUID）",
+          "en-US": "Node Match List (Name or UUID)"
+        },
+        "help": {
+          "zh-CN": "用于 include/exclude 模式；可填写机器名称或 UUID 关键词，多个用英文逗号分隔，例如 ORACLE-SG,腾讯云。include=只测试这些；exclude=除去这些都测试",
+          "en-US": "Used by include/exclude mode; comma-separated node names or UUID keywords. include=only matched; exclude=exclude matched"
+        },
+        "default": ""
+      },
+      {
+        "key": "streamUnlock.autoRunDays",
+        "type": "number",
+        "name": {
+          "zh-CN": "自动检测间隔天数",
+          "en-US": "Auto-run interval days"
+        },
+        "help": {
+          "zh-CN": "默认 5 天；后端定时任务会使用该值（当前预留）",
+          "en-US": "Default 5 days; reserved for backend scheduler"
+        },
+        "default": 5
+      },
+      {
+        "key": "streamUnlock.showIPv6",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示 IPv6 解锁检测",
+          "en-US": "Show IPv6 Unlock Checks"
+        },
+        "default": true
+      }
+    ]
+  }
+}

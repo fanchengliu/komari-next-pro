@@ -1,0 +1,15 @@
+services:
+  unlock-probe:
+    image: node:22-alpine
+    working_dir: /app
+    command: ["node", "server.mjs"]
+    environment:
+      KOMARI_BASE: ${KOMARI_BASE:-http://127.0.0.1:25774}
+      KOMARI_USER: ${KOMARI_USER:-admin}
+      KOMARI_PASS: ${KOMARI_PASS:-change-me}
+      PORT: ${UNLOCK_PROBE_PORT:-19116}
+    ports:
+      - "${UNLOCK_PROBE_PORT:-19116}:19116"
+    volumes:
+      - ./unlock-probe:/app
+    restart: unless-stopped

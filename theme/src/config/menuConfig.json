@@ -1,0 +1,105 @@
+{
+  "menu": [
+    {
+      "labelKey": "common.server",
+      "path": "/admin",
+      "icon": "Server"
+    },
+    {
+      "labelKey": "settings.title",
+      "path": "/admin/settings",
+      "icon": "Bolt",
+      "children": [
+        {
+          "labelKey": "settings.site.title",
+          "path": "/admin/settings/site",
+          "icon": "Home"
+        },
+        {
+          "labelKey": "theme.title",
+          "path": "/admin/settings/theme",
+          "icon": "Palette"
+        },
+        {
+          "labelKey": "settings.sign_on.title",
+          "path": "/admin/settings/sign-on",
+          "icon": "CircleArrowRight"
+        },
+        {
+          "labelKey": "settings.notification.title",
+          "path": "/admin/settings/notification",
+          "icon": "MessageCircleMore"
+        },
+        {
+          "labelKey": "settings.general.title",
+          "path": "/admin/settings/general",
+          "icon": "Ellipsis"
+        }
+      ]
+    },
+    {
+      "labelKey": "notification.title",
+      "path": "/admin/notification",
+      "icon": "Bell",
+      "children": [
+        {
+          "labelKey": "notification.offline.title",
+          "path": "/admin/notification/offline",
+          "icon": "Unplug"
+        },
+        {
+          "labelKey": "notification.load.title",
+          "path": "/admin/notification/load",
+          "icon": "TrendingUp"
+        },
+        {
+          "labelKey": "settings.general.title",
+          "path": "/admin/notification/general",
+          "icon": "Ellipsis"
+        }
+      ]
+    },
+    {
+      "labelKey": "exec.title",
+      "path": "/admin/exec",
+      "icon": "Code"
+    },
+    {
+      "labelKey": "ping.title",
+      "path": "/admin/ping",
+      "icon": "Activity"
+    },
+    {
+      "labelKey": "sessions.title",
+      "path": "/admin/sessions",
+      "icon": "Users"
+    },
+    {
+      "labelKey": "account.title",
+      "path": "/admin/account",
+      "icon": "UserCircle"
+    },
+    {
+      "labelKey": "logs.title",
+      "path": "/admin/logs",
+      "icon": "FileText"
+    },
+    {
+      "labelKey": "common.about",
+      "path": "/admin/about",
+      "icon": "AtSign"
+    },
+    {
+      "labelKey": "common.documentation",
+      "path": "https://komari-document.pages.dev/",
+      "icon": "Book",
+      "newTab": true
+    },
+    {
+      "labelKey": "common.home",
+      "path": "/",
+      "icon": "Home",
+      "newTab": true
+    }
+  ]
+}

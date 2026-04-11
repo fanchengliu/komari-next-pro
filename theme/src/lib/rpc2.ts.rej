@@ -1,0 +1,12 @@
+@@ -121,6 +121,11 @@
+   /**
+    * 自动建立连接（非阻塞）
+    */private autoConnect(): void {
++    // Skip during SSR/SSG
++    if (typeof window === 'undefined') {
++      return;
++    }
++    
+     if (this.connectionState !== RPC2ConnectionState.DISCONNECTED) {
+       return;
+     }
