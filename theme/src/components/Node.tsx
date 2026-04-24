@@ -11,6 +11,8 @@ import {
   Clock,
   ChartPie,
   Cloud,
+  Activity,
+  Wifi,
   Settings,
 } from "lucide-react";
 import type { TFunction } from "i18next";
@@ -21,6 +23,7 @@ import { getOSImage, getOSName } from "@/utils";
 import { formatBytes } from "@/utils/unitHelper";
 
 import Flag from "./Flag";
+import { usePingBlocks } from "@/hooks/usePingBlocks";
 
 // ── Helpers ──
 
@@ -75,6 +78,47 @@ function getExpiryClass(expiredAt: string | undefined): string {
 
 function ell(s: string, n: number) {
   return s && s.length > n ? s.slice(0, n) + "..." : s || "";
+}
+
+function formatLatencyMs(value: number): string {
+  if (!Number.isFinite(value) || value <= 0) return "--";
+  return `${Math.round(value)} ms`;
+}
+
+function formatPacketLoss(value: number): string {
+  if (!Number.isFinite(value) || value < 0) return "--";
+  return `${value.toFixed(1)}%`;
+}
+
+function pingBlockClass(latency: number, loss: boolean, empty: boolean, mode: "latency" | "loss") {
+  if (empty) return "ds-pb ds-pb-none";
+  if (mode === "loss") return `ds-pb ${loss ? "ds-pb-bad" : "ds-pb-good"}`;
+  if (loss || latency < 0) return "ds-pb ds-pb-bad";
+  if (latency >= 200) return "ds-pb ds-pb-bad";
+  if (latency >= 100) return "ds-pb ds-pb-warn";
+  return "ds-pb ds-pb-good";
+}
+
+function PingBlocksStrip({
+  blocks,
+  mode,
+}: {
+  blocks: { latency: number; time: string; loss: boolean }[];
+  mode: "latency" | "loss";
+}) {
+  return (
+    <div className="ds-pblocks" aria-label={mode === "latency" ? "latency samples" : "packet loss samples"}>
+      {blocks.map((b, i) => {
+        const empty = !b.time;
+        const title = empty
+          ? "no data"
+          : mode === "loss"
+            ? (b.loss ? "loss" : "ok")
+            : (b.loss || b.latency < 0 ? "loss" : `${b.latency.toFixed(1)} ms`);
+        return <span key={`${b.time || "empty"}-${i}`} className={pingBlockClass(b.latency, b.loss, empty, mode)} title={title} />;
+      })}
+    </div>
+  );
 }
 
 
@@ -168,16 +212,19 @@ interface NodeProps {
 
 type NodeCardVisibility = {
   cpu: boolean; memory: boolean; disk: boolean; monthlyTraffic: boolean;
+  latency: boolean; packetLoss: boolean;
   downloadSpeed: boolean; uploadSpeed: boolean; downloadTotal: boolean; uploadTotal: boolean;
   expire: boolean; uptime: boolean; ipBadges: boolean; osIcon: boolean; regionFlag: boolean;
 };
 const DEFAULT_NODE_CARD_VISIBILITY: NodeCardVisibility = {
   cpu: true, memory: true, disk: true, monthlyTraffic: true,
+  latency: true, packetLoss: true,
   downloadSpeed: true, uploadSpeed: true, downloadTotal: true, uploadTotal: true,
   expire: true, uptime: true, ipBadges: true, osIcon: true, regionFlag: true,
 };
 const VISIBILITY_FIELDS: { key: keyof NodeCardVisibility; label: string }[] = [
   {key:'cpu', label:'CPU'}, {key:'memory', label:'内存'}, {key:'disk', label:'磁盘'}, {key:'monthlyTraffic', label:'月度流量'},
+  {key:'latency', label:'延迟'}, {key:'packetLoss', label:'丢包'},
   {key:'downloadSpeed', label:'下载速度'}, {key:'uploadSpeed', label:'上传速度'}, {key:'downloadTotal', label:'下载流量'}, {key:'uploadTotal', label:'上传流量'},
   {key:'expire', label:'到期'}, {key:'uptime', label:'运行时间'}, {key:'ipBadges', label:'IPv4/IPv6'}, {key:'osIcon', label:'系统图标'}, {key:'regionFlag', label:'地区旗帜'},
 ];
@@ -189,6 +236,7 @@ const Node = ({ basic, live, online }: NodeProps) => {
   const [themeProConfig, setThemeProConfig] = useState<any>(null);
   const [draftVisibility, setDraftVisibility] = useState<NodeCardVisibility>(DEFAULT_NODE_CARD_VISIBILITY);
   const [publicCap, setPublicCap] = useState<{ hasIPv4?: boolean; hasIPv6?: boolean } | null>(null);
+  const pingBlocks = usePingBlocks(basic.uuid);
   useEffect(() => { fetch("/api/me").then(r => r.ok ? r.json() : null).then(me => setIsLoggedIn(!!me?.logged_in)).catch(() => setIsLoggedIn(false)); }, []);
   useEffect(() => {
     if (settingsOpen) document.body.classList.add('ds-card-settings-open');
@@ -222,6 +270,13 @@ const Node = ({ basic, live, online }: NodeProps) => {
   const netUp = live?.network?.up ?? 0;
   const netDown = live?.network?.down ?? 0;
   const uptime = live?.uptime ?? 0;
+  const recentPingBlocks = pingBlocks.blocks.slice(-10);
+  const recentLatencyValues = recentPingBlocks
+    .filter((b) => b.time && !b.loss && b.latency >= 0)
+    .map((b) => b.latency);
+  const recentLatencyAvg = recentLatencyValues.length
+    ? recentLatencyValues.reduce((sum, value) => sum + value, 0) / recentLatencyValues.length
+    : 0;
 
   const osName = getOSName(basic.os);
   const osImage = getOSImage(basic.os);
@@ -311,6 +366,16 @@ const Node = ({ basic, live, online }: NodeProps) => {
             <span className="ds-sr-val">{formatBytes(totalDown)}</span>
           </div> : null}
 
+          {/* Latency blocks */}
+          {visibility.latency ? <div className="ds-ping-mini">
+            <div className="ds-sr">
+              <Activity className="w-3.5 h-3.5 ds-c-blue" />
+              <span className="ds-sr-label">{t("nodeCard.latency", { defaultValue: "延迟" })}</span>
+              <span className="ds-sr-val">{pingBlocks.hasData ? formatLatencyMs(recentLatencyAvg) : "--"}</span>
+            </div>
+            <PingBlocksStrip blocks={recentPingBlocks} mode="latency" />
+          </div> : null}
+
           {/* Expiry */}
           {visibility.expire ? <FootItem icon={<CalendarDays className="w-3.5 h-3.5" />} label={t("nodeCard.expire", "到期")} className={getExpiryClass(basic.expired_at)} value={formatExpiry(basic.expired_at) === 'expired' ? t('nodeCard.expired', { defaultValue: '已过期' }) : formatExpiry(basic.expired_at)} /> : null}
         </div>
@@ -338,6 +403,16 @@ const Node = ({ basic, live, online }: NodeProps) => {
             <Cloud className="w-3.5 h-3.5 ds-c-muted" />
             <span className="ds-sr-label">{t("nodeCard.uploadTotal", "上传流量")}</span>
             <span className="ds-sr-val">{formatBytes(totalUp)}</span>
+          </div> : null}
+
+          {/* Packet loss blocks */}
+          {visibility.packetLoss ? <div className="ds-ping-mini">
+            <div className="ds-sr">
+              <Wifi className="w-3.5 h-3.5 ds-c-muted" />
+              <span className="ds-sr-label">{t("chart.lossRate", { defaultValue: "丢包" })}</span>
+              <span className="ds-sr-val">{pingBlocks.hasData ? formatPacketLoss(pingBlocks.avgLoss) : "--"}</span>
+            </div>
+            <PingBlocksStrip blocks={recentPingBlocks} mode="loss" />
           </div> : null}
 
           {/* Uptime */}

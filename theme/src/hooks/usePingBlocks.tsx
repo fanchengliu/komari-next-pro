@@ -33,7 +33,7 @@ export function usePingBlocks(uuid: string): PingBlocksResult {
       const resp = await call<any, any>('common:getRecords', {
         uuid,
         type: 'ping',
-        hours: 1, // last hour is enough for 20 blocks
+        hours: 24, // fetch enough history, then use the latest 20 samples
       });
 
       const records: { value: number; time: string }[] = resp?.records || [];
