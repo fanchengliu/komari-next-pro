@@ -1,5 +1,10 @@
 # Komari Next Pro
 
+> **重要：部署前请先阅读 `docs/DEPLOY.md`。**
+> 
+> 如果只上传主题包而不部署所需后端（`unlock-probe` 和 `ip-meta`），部分面板会报错。
+
+
 Komari Next Pro 是一个 Komari 自定义主题，并附带一个可选的 `unlock-probe` 后端，用于流媒体解锁展示和节点卡片高级配置。
 
 ## 项目简介

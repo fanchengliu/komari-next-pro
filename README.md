@@ -1,5 +1,10 @@
 # Komari Next Pro
 
+> **IMPORTANT: READ `docs/DEPLOY.md` BEFORE DEPLOYMENT.**
+> 
+> If you deploy only the theme package without the required backends (`unlock-probe` and `ip-meta`), some panels will fail.
+
+
 Komari Next Pro is a custom theme for Komari, bundled with an optional `unlock-probe` backend for stream unlock display and advanced card configuration.
 
 ## Overview
