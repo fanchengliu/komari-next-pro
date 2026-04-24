@@ -114,6 +114,26 @@ KOMARI_PASS=change-me \
 node server.mjs
 ```
 
+## 一键安装 unlock-probe
+
+你可以直接通过 Release 附件安装可选的 unlock-probe 后端：
+
+```bash
+curl -fsSL -o install-unlock-probe.sh https://raw.githubusercontent.com/fanchengliu/komari-next-pro/main/scripts/install-unlock-probe.sh
+bash install-unlock-probe.sh
+```
+
+也支持通过环境变量覆盖参数，例如：
+
+```bash
+INSTALL_DIR=/opt/komari-next-pro-unlock-probe \
+KOMARI_BASE=http://127.0.0.1:25774 \
+KOMARI_USER=admin \
+KOMARI_PASS='你的密码' \
+UNLOCK_PROBE_PORT=19116 \
+bash install-unlock-probe.sh
+```
+
 ## 部署说明
 
 ### 反向代理

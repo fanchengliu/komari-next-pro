@@ -114,6 +114,26 @@ KOMARI_PASS=change-me \
 node server.mjs
 ```
 
+## One-line unlock-probe installer
+
+You can install the optional unlock-probe backend directly from the latest release bundle:
+
+```bash
+curl -fsSL -o install-unlock-probe.sh https://raw.githubusercontent.com/fanchengliu/komari-next-pro/main/scripts/install-unlock-probe.sh
+bash install-unlock-probe.sh
+```
+
+Environment overrides are supported, for example:
+
+```bash
+INSTALL_DIR=/opt/komari-next-pro-unlock-probe \
+KOMARI_BASE=http://127.0.0.1:25774 \
+KOMARI_USER=admin \
+KOMARI_PASS='your-password' \
+UNLOCK_PROBE_PORT=19116 \
+bash install-unlock-probe.sh
+```
+
 ## Deployment Notes
 
 ### Reverse proxy
