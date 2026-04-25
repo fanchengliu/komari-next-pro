@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import {
@@ -239,9 +240,9 @@ const Node = ({ basic, live, online }: NodeProps) => {
   const pingBlocks = usePingBlocks(basic.uuid);
   useEffect(() => { fetch("/api/me").then(r => r.ok ? r.json() : null).then(me => setIsLoggedIn(!!me?.logged_in)).catch(() => setIsLoggedIn(false)); }, []);
   useEffect(() => {
-    if (settingsOpen) document.body.classList.add('ds-card-settings-open');
-    else document.body.classList.remove('ds-card-settings-open');
-    return () => document.body.classList.remove('ds-card-settings-open');
+    if (!settingsOpen) return;
+    document.body.classList.add("ds-card-settings-open");
+    return () => document.body.classList.remove("ds-card-settings-open");
   }, [settingsOpen]);
   useEffect(() => { if (isLoggedIn || !basic.uuid) return; fetch(`/unlock-probe/unlock/capability-public?uuid=${encodeURIComponent(basic.uuid)}`).then(r => r.ok ? r.json() : null).then(j => j?.ok && setPublicCap({ hasIPv4: !!j.hasIPv4, hasIPv6: !!j.hasIPv6 })).catch(() => {}); }, [isLoggedIn, basic.uuid]);
   useEffect(() => { fetch('/unlock-probe/theme-config', { credentials:'include' }).then(r => r.ok ? r.json() : null).then(j => { if(j?.ok){ setThemeProConfig(j.config); setDraftVisibility({ ...DEFAULT_NODE_CARD_VISIBILITY, ...(j.config?.nodeCardVisibilityByUuid?.[basic.uuid] || {}) }); } }).catch(()=>{}); }, [basic.uuid]);
@@ -324,7 +325,7 @@ const Node = ({ basic, live, online }: NodeProps) => {
           <span className={`ds-hdr-dot ${online ? "on" : "off"}`} />
         </div>
       </div>
-      {settingsOpen ? (
+      {settingsOpen ? createPortal(
         <div className="ds-card-settings-overlay" onClick={() => setSettingsOpen(false)}>
           <div className="ds-card-settings-panel" onClick={(e)=>e.stopPropagation()}>
             <div className="ds-card-settings-title">{basic.name} 显示设置</div>
@@ -342,7 +343,8 @@ const Node = ({ basic, live, online }: NodeProps) => {
               <button type="button" className="primary" onClick={saveCardVisibility}>保存</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
 
       {/* ─ Two-column body ─ */}
