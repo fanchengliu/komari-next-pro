@@ -12,6 +12,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { OfflineIndicator } from "@/components/OfflineIndicator"
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt"
 import { PWAUpdatePrompt } from "@/components/PWAUpdatePrompt"
+import { MobileTouchFeedback } from "@/components/MobileTouchFeedback"
 import "@/i18n/config"
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -32,6 +33,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
                 <OfflineIndicator />
                 <PWAInstallPrompt />
                 <PWAUpdatePrompt />
+                <MobileTouchFeedback />
                 </AssetSummaryProvider>
               </LiveDataProvider>
             </NodeListProvider>

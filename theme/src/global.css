@@ -804,7 +804,7 @@ body, * {
 .ds-ring-card-net .ds-ring-body{ gap: 10px; }
 .ds-ring-metrics{ min-width:0; }
 .ds-ring-value2{ font-size: 13px; font-weight: 900; color: var(--ds-text); }
-.ds-ring-sub2{ margin-top: 2px; font-size: 12px; font-weight: 800; color: var(--ds-text); opacity: .9; }
+.ds-ring-sub2{ margin-top: 2px; font-size: 12px; font-weight: 800; color: var(--ds-text); opacity: .46; }
 .ds-ring-sub3{ margin-top: 6px; font-size: 11px; color: var(--ds-muted); }
 .ds-ring-fg-net{ stroke: #22c55e; }
 
@@ -1410,3 +1410,902 @@ body.ds-card-settings-open .ds-card2:hover{box-shadow:0 10px 30px rgba(15,23,42,
 body.ds-card-settings-open .ds-card-settings-btn{pointer-events:none!important}
 .ds-card-settings-overlay{pointer-events:auto!important}
 .ds-card-settings-panel *{pointer-events:auto!important}
+
+/* --------------------------------------------------------------------------
+   Komari Next Pro mobile overflow hardening
+   2026-04-25: Fix instance page chart/KPI overflow on phones.
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  html,
+  body,
+  main,
+  main.flex-1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .ds-inst {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 8px 10px !important;
+    gap: 14px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .ds-inst > .w-full,
+  .ds-inst .w-full,
+  .ds-inst-header,
+  .ds-tabbar,
+  .ds-tabbar-inner,
+  .ds-inst-section,
+  .ds-inst-section-body,
+  .ds-chart-grid,
+  .ds-chart-card,
+  .ds-status-chart-viewport,
+  .ds-status-chart-frame,
+  .ds-status-chart-frame[data-slot="chart"],
+  .ds-status-chart-frame .recharts-responsive-container,
+  .ds-status-chart-frame .recharts-wrapper,
+  .ds-status-chart-frame .recharts-surface,
+  .ds-ip-page,
+  .ds-ip-card,
+  .ds-ip-detail-card,
+  .ds-nq-page,
+  .ds-nq-section,
+  .ds-nq-kpi {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ds-inst-header,
+  .ds-tabbar,
+  .ds-inst-section {
+    border-radius: 18px !important;
+  }
+
+  .ds-inst-header,
+  .ds-tabbar {
+    padding: 10px !important;
+  }
+
+  .ds-inst-section {
+    padding: 10px 10px 12px !important;
+    overflow-x: hidden !important;
+  }
+
+  .ds-inst-section-body {
+    overflow-x: hidden !important;
+  }
+
+  .ds-inst-top-row {
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .ds-inst-top-left {
+    flex: 1 1 auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ds-inst-top-right {
+    flex: 0 0 auto !important;
+    max-width: 100% !important;
+  }
+
+  .ds-inst-name {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .ds-inst-pills {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .ds-inst-pills .ds-pill {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  /* KPI cards: phones need a real single-column layout, not compressed desktop cards. */
+  .ds-ov-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ds-kpi-card {
+    min-width: 0 !important;
+    min-height: 116px !important;
+    padding: 12px !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+    border-radius: 16px !important;
+    transform: none !important;
+  }
+
+  .ds-kpi-card:hover,
+  .ds-chart-card:hover,
+  .ds-ip-card:hover,
+  .ds-ip-detail-card:hover,
+  .ds-nq-kpi:hover,
+  .ds-nq-section:hover {
+    transform: none !important;
+  }
+
+  .ds-kpi-left {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .ds-kpi-title,
+  .ds-kpi-big,
+  .ds-kpi-sub,
+  .ds-kpi-lines,
+  .ds-kpi-lines div {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ds-kpi-title {
+    white-space: nowrap !important;
+  }
+
+  .ds-kpi-big {
+    font-size: 18px !important;
+  }
+
+  .ds-kpi-lines {
+    padding-right: 0 !important;
+    font-size: 10px !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+
+  .ds-kpi-ring {
+    width: 64px !important;
+    height: 64px !important;
+    flex: 0 0 64px !important;
+  }
+
+  .ds-kpi-ring .ds-ring-svg {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .ds-kpi-ring-dual .ds-ring-svg-inner {
+    inset: 8px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .ds-ring-center-label {
+    font-size: 10px !important;
+  }
+
+  /* Recharts fix: ChartContainer has aspect-video, which forced ~520px width on a 393px phone. */
+  .ds-chart-grid {
+    grid-template-columns: 1fr !important;
+    overflow-x: hidden !important;
+  }
+
+  .ds-chart-card {
+    padding: 12px 10px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    transform: none !important;
+  }
+
+  .ds-chart-head {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    min-height: 0 !important;
+  }
+
+  .ds-chart-tabs {
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding-bottom: 2px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .ds-chart-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ds-chart-tab {
+    flex: 0 0 auto !important;
+    padding: 5px 9px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .ds-status-chart-viewport {
+    height: 260px !important;
+    min-height: 260px !important;
+    overflow: hidden !important;
+  }
+
+  .ds-status-chart-frame[data-slot="chart"] {
+    aspect-ratio: auto !important;
+    height: 100% !important;
+    display: block !important;
+    justify-content: initial !important;
+    overflow: hidden !important;
+  }
+
+  .ds-status-chart-frame .recharts-responsive-container {
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .ds-status-chart-frame .recharts-wrapper,
+  .ds-status-chart-frame .recharts-surface {
+    height: 100% !important;
+  }
+
+  .ds-status-chart-frame .recharts-cartesian-axis-tick-value tspan {
+    font-size: 10px !important;
+  }
+
+  .ds-chart-legend-bottom {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Detail tabs and IP/network panels should shrink instead of pushing the viewport. */
+  .ds-tabbar .inline-flex {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .ds-tabbar .inline-flex::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ds-top-tab-item {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  .ds-ip-hero-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ds-ip-detail-row strong,
+  .ds-nq-summary-list strong,
+  .ds-nq-meta-list strong,
+  .ds-nq-route-item strong {
+    max-width: 56% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .ds-inst {
+    padding-inline: 8px !important;
+  }
+
+  .ds-inst-section,
+  .ds-inst-header,
+  .ds-tabbar {
+    border-radius: 16px !important;
+  }
+
+  .ds-kpi-ring {
+    width: 58px !important;
+    height: 58px !important;
+    flex-basis: 58px !important;
+  }
+
+  .ds-kpi-ring .ds-ring-svg {
+    width: 58px !important;
+    height: 58px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Komari Next Pro mobile touch interactions
+   2026-04-25: Bring back card/button feedback on touch devices.
+   -------------------------------------------------------------------------- */
+@media (hover: none), (pointer: coarse) {
+  .ds-touch-feedback-enabled :is(
+    button,
+    a,
+    [role="button"],
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-home-toolbar-stat,
+    .ds-home-toolbar-label,
+    .ds-pill
+  ) {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .ds-touch-feedback-enabled :is(
+    button,
+    a,
+    [role="button"],
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-home-toolbar-stat,
+    .ds-home-toolbar-label,
+    .ds-pill
+  ):not(.ds-no-ripple) {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ds-touch-feedback-enabled :is(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ) {
+    transition: transform .18s cubic-bezier(.2,.8,.2,1),
+      box-shadow .18s ease,
+      border-color .18s ease,
+      background-color .18s ease,
+      filter .18s ease !important;
+  }
+
+  .ds-touch-feedback-enabled :is(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ).ds-touch-active {
+    transform: translateY(.5px) scale(.996) !important;
+    filter: saturate(1.012) brightness(.996) !important;
+    border-color: rgba(59,130,246,.20) !important;
+    box-shadow: 0 6px 14px rgba(15,23,42,.065), inset 0 1px 0 rgba(255,255,255,.32) !important;
+  }
+
+  .dark .ds-touch-feedback-enabled :is(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ).ds-touch-active {
+    box-shadow: 0 8px 18px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04) !important;
+    border-color: rgba(96,165,250,.24) !important;
+  }
+
+  .ds-touch-feedback-enabled :is(
+    button,
+    a,
+    [role="button"],
+    .ds-home-toolbar-viewbtn,
+    .ds-home-toolbar-tabtrigger,
+    .ds-chart-tab,
+    .ds-top-tab-item,
+    .ds-card-settings-btn,
+    .ds-ip-copy,
+    .ds-pill
+  ).ds-touch-active {
+    transform: translateY(.5px) scale(.988) !important;
+    filter: brightness(.996) saturate(1.012) !important;
+  }
+
+  .ds-touch-feedback-enabled .ds-touch-ripple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: var(--ds-ripple-size, 120px);
+    height: var(--ds-ripple-size, 120px);
+    margin-left: calc(var(--ds-ripple-size, 120px) / -2);
+    margin-top: calc(var(--ds-ripple-size, 120px) / -2);
+    border-radius: 9999px;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(59,130,246,.14) 0%, rgba(59,130,246,.08) 34%, transparent 68%);
+    transform: scale(0);
+    opacity: .46;
+    animation: ds-touch-ripple .42s ease-out forwards;
+  }
+
+  .dark .ds-touch-feedback-enabled .ds-touch-ripple {
+    background: radial-gradient(circle, rgba(96,165,250,.16) 0%, rgba(96,165,250,.09) 34%, transparent 68%);
+  }
+
+  .ds-home-toolbar-tabs-wrap,
+  .ds-chart-tabs,
+  .ds-tabbar .inline-flex {
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  }
+
+  .ds-home-toolbar-tabtrigger,
+  .ds-chart-tab,
+  .ds-top-tab-item {
+    scroll-snap-align: start;
+  }
+}
+
+@keyframes ds-touch-ripple {
+  0% {
+    opacity: .38;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-touch-feedback-enabled *,
+  .ds-touch-feedback-enabled .ds-touch-ripple {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Komari Next Pro desktop card interactions
+   2026-04-25: Desktop hover/click feedback for the whole card surface.
+   Scoped to theme cards/toolbars; mobile touch feedback remains separate.
+   2026-04-25 subtle pass: reduced scale/shadow/ripple after user feedback.
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --ds-desktop-hover-y: -1.25px;
+    --ds-desktop-active-y: .5px;
+    --ds-desktop-hover-scale: 1.002;
+    --ds-desktop-active-scale: .998;
+    --ds-desktop-hover-border: rgba(59,130,246,.20);
+    --ds-desktop-hover-shadow: 0 14px 30px rgba(15,23,42,.10), inset 0 1px 0 rgba(255,255,255,.45);
+    --ds-desktop-active-shadow: 0 8px 18px rgba(15,23,42,.08), inset 0 1px 5px rgba(15,23,42,.035);
+  }
+
+  .dark {
+    --ds-desktop-hover-border: rgba(96,165,250,.24);
+    --ds-desktop-hover-shadow: 0 16px 36px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.04);
+    --ds-desktop-active-shadow: 0 9px 22px rgba(0,0,0,.26), inset 0 1px 5px rgba(0,0,0,.14);
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  ) {
+    position: relative;
+    isolation: isolate;
+    transform-origin: center center;
+    will-change: transform, box-shadow, border-color, filter;
+    transition:
+      transform .22s cubic-bezier(.2,.8,.2,1),
+      box-shadow .22s ease,
+      border-color .22s ease,
+      background .22s ease,
+      filter .22s ease !important;
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  )::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    background:
+      radial-gradient(circle at 22% 0%, rgba(96,165,250,.09), transparent 34%),
+      radial-gradient(circle at 92% 14%, rgba(52,211,153,.06), transparent 30%),
+      linear-gradient(180deg, rgba(255,255,255,.12), transparent 48%);
+    transition: opacity .22s ease;
+  }
+
+  .dark :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  )::before {
+    background:
+      radial-gradient(circle at 22% 0%, rgba(96,165,250,.08), transparent 36%),
+      radial-gradient(circle at 92% 14%, rgba(52,211,153,.045), transparent 32%),
+      linear-gradient(180deg, rgba(255,255,255,.025), transparent 52%);
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  ):hover {
+    transform: translateY(var(--ds-desktop-hover-y)) scale(var(--ds-desktop-hover-scale)) !important;
+    border-color: var(--ds-desktop-hover-border) !important;
+    box-shadow: var(--ds-desktop-hover-shadow) !important;
+    filter: saturate(1.015) brightness(1.003);
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  ):hover::before {
+    opacity: 1;
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar
+  ):active {
+    transform: translateY(var(--ds-desktop-active-y)) scale(var(--ds-desktop-active-scale)) !important;
+    box-shadow: var(--ds-desktop-active-shadow) !important;
+    filter: saturate(1.006) brightness(.997);
+    transition-duration: .08s !important;
+  }
+
+  /* Table-mode nodes are rows, not cards, so use a flatter hover. */
+  .node-table-modern tbody tr.ds-node-row {
+    transition: transform .18s ease, filter .18s ease !important;
+  }
+
+  .node-table-modern tbody tr.ds-node-row:hover {
+    transform: translateY(-1px) !important;
+    filter: saturate(1.012) brightness(1.002);
+  }
+
+  .node-table-modern tbody tr.ds-node-row:active {
+    transform: translateY(.5px) scale(.998) !important;
+    transition-duration: .08s !important;
+  }
+
+  .node-table-modern tbody tr.ds-node-row:hover td {
+    border-color: var(--ds-desktop-hover-border) !important;
+    box-shadow: 0 10px 22px rgba(15,23,42,.075), inset 0 1px 0 rgba(255,255,255,.42) !important;
+  }
+
+  .dark .node-table-modern tbody tr.ds-node-row:hover td {
+    box-shadow: 0 12px 26px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.035) !important;
+  }
+
+  /* Keep chart internals stable while the chart card itself interacts. */
+  .recharts-wrapper,
+  .recharts-surface,
+  .recharts-layer,
+  .recharts-tooltip-wrapper {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* Scoped buttons/tabs/pills: avoid moving ordinary page links. */
+  :where(
+    .ds-home-toolbar,
+    .ds-card2,
+    .ds-chart-card,
+    .ds-tabbar,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ) :is(
+    button,
+    a,
+    [role="button"],
+    [role="tab"],
+    .ds-home-toolbar-viewbtn,
+    .ds-home-toolbar-tabtrigger,
+    .ds-chart-tab,
+    .ds-top-tab-item,
+    .ds-card-settings-btn,
+    .ds-ip-copy,
+    .ds-pill,
+    .ds-unlock-badge,
+    .ds-nq-summary-chip
+  ):not(:disabled):not([aria-disabled="true"]) {
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform .16s cubic-bezier(.2,.8,.2,1),
+      box-shadow .16s ease,
+      border-color .16s ease,
+      background-color .16s ease,
+      color .16s ease,
+      filter .16s ease !important;
+  }
+
+  :where(
+    .ds-home-toolbar,
+    .ds-card2,
+    .ds-chart-card,
+    .ds-tabbar,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ) :is(
+    button,
+    a,
+    [role="button"],
+    [role="tab"],
+    .ds-home-toolbar-viewbtn,
+    .ds-home-toolbar-tabtrigger,
+    .ds-chart-tab,
+    .ds-top-tab-item,
+    .ds-card-settings-btn,
+    .ds-ip-copy,
+    .ds-pill,
+    .ds-unlock-badge,
+    .ds-nq-summary-chip
+  ):not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-.5px) scale(1.004) !important;
+    filter: saturate(1.018) brightness(1.003);
+  }
+
+  :where(
+    .ds-home-toolbar,
+    .ds-card2,
+    .ds-chart-card,
+    .ds-tabbar,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-section,
+    .ds-nq-route-block
+  ) :is(
+    button,
+    a,
+    [role="button"],
+    [role="tab"],
+    .ds-home-toolbar-viewbtn,
+    .ds-home-toolbar-tabtrigger,
+    .ds-chart-tab,
+    .ds-top-tab-item,
+    .ds-card-settings-btn,
+    .ds-ip-copy,
+    .ds-pill,
+    .ds-unlock-badge,
+    .ds-nq-summary-chip
+  ):not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(.5px) scale(.988) !important;
+    filter: saturate(1.01) brightness(.994);
+    transition-duration: .08s !important;
+  }
+
+  /* Whole-card blank space also has press feedback; no pointer cursor unless child is actionable. */
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-home-toolbar
+  ) {
+    cursor: default;
+  }
+
+  :where(
+    .ds-card2,
+    .ds-chart-card,
+    .ds-ip-detail-card,
+    .ds-home-toolbar,
+    .ds-tabbar,
+    .ds-unlock-item,
+    .ds-nq-section
+  ) :is(a, button, [role="button"], [role="tab"]) {
+    cursor: pointer;
+  }
+
+  /* If a child control is active, parent remains tactile but not over-amplified. */
+  :where(.ds-chart-card, .ds-ip-detail-card, .ds-home-toolbar):has(button:active),
+  :where(.ds-card2):has(a:active),
+  :where(.ds-tabbar):has([role="tab"]:active) {
+    filter: saturate(1.02) brightness(1);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: reduce) {
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar,
+    .node-table-modern tbody tr.ds-node-row
+  ) {
+    transition-duration: .01ms !important;
+  }
+
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar,
+    .node-table-modern tbody tr.ds-node-row
+  ):hover,
+  :where(
+    .ds-dashboard-topcard,
+    .ds-card2,
+    .ds-kpi-card,
+    .ds-chart-card,
+    .ds-inst-header,
+    .ds-tabbar,
+    .ds-ip-card,
+    .ds-ip-detail-card,
+    .ds-unlock-item,
+    .ds-nq-kpi,
+    .ds-nq-section,
+    .ds-nq-route-block,
+    .ds-nq-side-card,
+    .ds-nq-trend-card,
+    .node-table-shell,
+    .ds-home-toolbar,
+    .node-table-modern tbody tr.ds-node-row
+  ):active {
+    transform: none !important;
+  }
+}

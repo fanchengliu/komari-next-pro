@@ -845,3 +845,195 @@
 :is(.dark) .ds-unlock-item-detail{color:#94a3b8}
 :is(.dark) .ds-unlock-badge.pending{background:rgba(71,85,105,0.24);color:#cbd5e1}
 @media (max-width: 900px){.ds-unlock-grid{grid-template-columns:1fr}}
+
+/* --------------------------------------------------------------------------
+   Komari Next Pro mobile toolbar/card hardening
+   2026-04-25: Keep homepage toolbar tabs inside the phone viewport.
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .ds-home-toolbar,
+  .ds-home-toolbar-quad,
+  .ds-home-toolbar-cell,
+  .ds-home-toolbar-cell-search,
+  .ds-home-toolbar-cell-stat,
+  .ds-home-toolbar-cell-group,
+  .ds-home-toolbar-cell-view,
+  .ds-home-toolbar-group-shell,
+  .ds-home-toolbar-viewswitch-row,
+  .ds-card-grid,
+  .ds-card2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ds-home-toolbar,
+  .ds-home-toolbar:hover {
+    transform: none !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+
+  .ds-home-toolbar-quad {
+    grid-template-columns: minmax(0, 1fr) !important;
+    column-gap: 0 !important;
+    row-gap: 10px !important;
+    padding: 12px !important;
+  }
+
+  .ds-home-toolbar-group-shell {
+    align-items: stretch !important;
+    overflow: hidden !important;
+  }
+
+  .ds-home-toolbar-label {
+    width: max-content !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  .ds-home-toolbar-cell-group .ds-home-toolbar-tabs-wrap,
+  .ds-home-toolbar-tabs-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding-bottom: 0 !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .ds-home-toolbar-tabs-wrap::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ds-home-toolbar-tabs-wrap > .w-auto {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .ds-home-toolbar-cell-group .ds-home-toolbar-tabslist,
+  .ds-home-toolbar-tabslist {
+    width: max-content !important;
+    max-width: none !important;
+    min-width: max-content !important;
+    justify-content: flex-start !important;
+  }
+
+  .ds-home-toolbar-viewswitch-row {
+    gap: 8px !important;
+    overflow: hidden !important;
+  }
+
+  .ds-home-toolbar-viewswitch-row .ds-home-toolbar-viewbtn {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    height: 38px !important;
+  }
+
+  .ds-home-toolbar-cell-stat .ds-home-toolbar-stat {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .ds-home-toolbar-input {
+    height: 42px !important;
+  }
+
+  .ds-home-toolbar:hover .ds-home-toolbar-cell-stat .ds-home-toolbar-stat,
+  .ds-home-toolbar:hover .ds-home-toolbar-group-shell,
+  .ds-home-toolbar:hover .ds-home-toolbar-cell-search .ds-home-toolbar-search,
+  .ds-home-toolbar:hover .ds-home-toolbar-viewswitch-row {
+    transform: none !important;
+  }
+
+  .ds-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ds-card2 {
+    border-radius: 18px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .ds-body {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .ds-card2 {
+    padding: 14px 12px 12px !important;
+  }
+
+  .ds-hdr2-right {
+    width: auto !important;
+    min-width: 0 !important;
+    flex: 0 1 auto !important;
+  }
+}
+
+/* Mobile touch detail for homepage cards/buttons. Loaded with NodeDisplay. */
+@media (hover: none), (pointer: coarse) {
+  .ds-touch-feedback-enabled .ds-card2.ds-touch-active {
+    transform: translateY(.5px) scale(.996) !important;
+  }
+
+  .ds-touch-feedback-enabled .ds-home-toolbar-viewbtn.ds-touch-active,
+  .ds-touch-feedback-enabled .ds-home-toolbar-tabtrigger.ds-touch-active {
+    box-shadow: inset 0 1px 4px rgba(15,23,42,.05) !important;
+  }
+
+  .dark .ds-touch-feedback-enabled .ds-home-toolbar-viewbtn.ds-touch-active,
+  .dark .ds-touch-feedback-enabled .ds-home-toolbar-tabtrigger.ds-touch-active {
+    box-shadow: inset 0 1px 4px rgba(0,0,0,.18) !important;
+  }
+}
+
+/* Desktop-specific homepage card polish: isolated from mobile touch feedback. */
+@media (hover: hover) and (pointer: fine) {
+  .ds-card-grid {
+    perspective: 1200px;
+  }
+
+  .ds-card2:hover .ds-hdr-dot.on,
+  .ds-card2:hover .ds-hdr-dot.off {
+    transform: scale(1.06);
+  }
+
+  .ds-card2:hover .ds-hdr-name,
+  .ds-card2:hover .ds-node-title {
+    color: #2563eb !important;
+  }
+
+  .dark .ds-card2:hover .ds-hdr-name,
+  .dark .ds-card2:hover .ds-node-title {
+    color: #93c5fd !important;
+  }
+
+  .ds-card2:hover .ds-fill,
+  .ds-card2:hover .ds-node-metric-fill {
+    filter: saturate(1.035) brightness(1.006);
+  }
+
+  .ds-home-toolbar:hover .ds-home-toolbar-input,
+  .ds-home-toolbar:hover .ds-home-toolbar-stat,
+  .ds-home-toolbar:hover .ds-home-toolbar-label,
+  .ds-home-toolbar:hover .ds-home-toolbar-viewswitch-row,
+  .ds-home-toolbar:hover .ds-home-toolbar-tabslist {
+    border-color: rgba(59,130,246,.12) !important;
+  }
+
+  .dark .ds-home-toolbar:hover .ds-home-toolbar-input,
+  .dark .ds-home-toolbar:hover .ds-home-toolbar-stat,
+  .dark .ds-home-toolbar:hover .ds-home-toolbar-label,
+  .dark .ds-home-toolbar:hover .ds-home-toolbar-viewswitch-row,
+  .dark .ds-home-toolbar:hover .ds-home-toolbar-tabslist {
+    border-color: rgba(96,165,250,.16) !important;
+  }
+}
