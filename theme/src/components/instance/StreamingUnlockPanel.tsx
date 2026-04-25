@@ -144,9 +144,26 @@ export default function StreamingUnlockPanel({ nodeUuid, nodeName, ipv4, ipv6, i
   const includeTokens = effectiveNodeMatchList.split(new RegExp("[\\n,，;；、]+")) .map(x => x.trim().toLowerCase()).filter(Boolean);
   const nodeMatchesStreamList = includeTokens.some(token => String(nodeUuid || "").toLowerCase().includes(token) || String(nodeName || "").toLowerCase().includes(token));
   const themeEnabledForNode = effectiveStreamMode === "off" ? false : effectiveStreamMode === "all" ? true : effectiveStreamMode === "include" ? nodeMatchesStreamList : effectiveStreamMode === "exclude" ? !nodeMatchesStreamList : true;
-  const enabledForNode = themeEnabledForNode && !(probeConfig?.disabledNodeUuids || []).includes(String(nodeUuid || ""));
+  const disabledByNodeConfig = (probeConfig?.disabledNodeUuids || []).includes(String(nodeUuid || ""));
+  const enabledForNode = themeEnabledForNode && !disabledByNodeConfig;
   const hasIPv4 = loggedIn ? (capability?.hasIPv4 ?? propHasIPv4) : true;
   const hasIPv6 = effectiveShowIPv6 && (loggedIn ? (capability?.hasIPv6 ?? propHasIPv6) : true);
+
+  const configNotice = !effectiveStreamEnabled
+    ? "流媒体解锁未启用，请在主题设置中开启。"
+    : effectiveStreamMode === "off"
+      ? "流媒体解锁模式为关闭，请在主题设置中调整。"
+      : !themeEnabledForNode
+        ? effectiveStreamMode === "include"
+          ? "当前节点未加入流媒体检测范围，请在节点匹配列表中加入此节点名称或 UUID。"
+          : effectiveStreamMode === "exclude"
+            ? "当前节点被流媒体检测排除规则过滤，请调整节点匹配列表。"
+            : "当前节点未加入流媒体检测范围。"
+        : disabledByNodeConfig
+          ? "当前节点已在“不检测以下设备”列表中，暂不执行流媒体检测。"
+          : null;
+
+  const canRunProbe = !configNotice && !!nodeUuid && loggedIn && isOnline;
 
   const cardsFor = (data: UnlockApiResponse | null, loading: boolean) => {
     if (loading) return cloneCards("loading", "测试中…");
@@ -238,7 +255,7 @@ export default function StreamingUnlockPanel({ nodeUuid, nodeName, ipv4, ipv6, i
   }, [nodeUuid, hasIPv4, hasIPv6]);
 
   const runFamily = async (family: "4" | "6") => {
-    if (!nodeUuid || !enabledForNode || !effectiveStreamEnabled || effectiveStreamMode === "off" || !isOnline) return;
+    if (!canRunProbe) return;
     family === "4" ? setLoading4(true) : setLoading6(true);
     setError(null);
     try {
@@ -265,7 +282,7 @@ export default function StreamingUnlockPanel({ nodeUuid, nodeName, ipv4, ipv6, i
 
   const busy = loading4 || loading6;
 
-  if (!effectiveStreamEnabled || effectiveStreamMode === "off" || !enabledForNode) return null;
+  const noAddressNotice = !configNotice && loggedIn && !hasIPv4 && !hasIPv6 ? "当前节点没有可检测的 IPv4 / IPv6 信息。" : null;
 
   return (
     <div className="ds-unlock-panel ds-ip-detail-card">
@@ -294,20 +311,23 @@ export default function StreamingUnlockPanel({ nodeUuid, nodeName, ipv4, ipv6, i
       ) : null}
 
       <div style={{ display: "flex", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
-        <button className="ds-home-toolbar-viewbtn is-active" onClick={runAll} disabled={busy || !nodeUuid || !loggedIn || !isOnline}>
+        <button className="ds-home-toolbar-viewbtn is-active" onClick={runAll} disabled={busy || !canRunProbe}>
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
-          <span>{!isOnline ? "节点离线" : busy ? "测试中…" : loggedIn ? "开始测试" : "登录后可测试"}</span>
+          <span>{configNotice ? "配置未启用" : !isOnline ? "节点离线" : busy ? "测试中…" : loggedIn ? "开始测试" : "登录后可测试"}</span>
         </button>
       </div>
-      {!isOnline ? <div className="ds-ip-notice ds-ip-notice-warn"><AlertTriangle size={14} /> 节点离线，暂不支持检测</div> : null}
+      {configNotice ? <div className="ds-ip-notice ds-ip-notice-warn"><AlertTriangle size={14} /> {configNotice}</div> : null}
+      {!configNotice && !loggedIn ? <div className="ds-ip-notice">登录后可执行检测并查看完整结果，未登录状态仅显示占位信息。</div> : null}
+      {!configNotice && !isOnline ? <div className="ds-ip-notice ds-ip-notice-warn"><AlertTriangle size={14} /> 节点离线，暂不支持检测</div> : null}
+      {noAddressNotice ? <div className="ds-ip-notice ds-ip-notice-warn"><AlertTriangle size={14} /> {noAddressNotice}</div> : null}
       {error ? <div className="ds-ip-notice ds-ip-notice-warn"><AlertTriangle size={14} /> 接口请求失败：{error}</div> : null}
-      {hasIPv4 ? (
+      {!configNotice && hasIPv4 ? (
         <div className="ds-ip-detail-card" style={{ marginTop: 14 }}>
           <div className="ds-ip-score-head"><Globe2 size={16} /> IPv4 解锁结果</div>
           <ResultGrid masked={!loggedIn} cards={cardsFor(v4Data, loading4).length ? cardsFor(v4Data, loading4) : cloneCards("idle", "等待开始测试")} />
         </div>
       ) : null}
-      {hasIPv6 ? (
+      {!configNotice && hasIPv6 ? (
         <div className="ds-ip-detail-card" style={{ marginTop: 14 }}>
           <div className="ds-ip-score-head"><Globe2 size={16} /> IPv6 解锁结果</div>
           <ResultGrid masked={!loggedIn} cards={cardsFor(v6Data, loading6).length ? cardsFor(v6Data, loading6) : cloneCards("idle", "等待开始测试")} />
