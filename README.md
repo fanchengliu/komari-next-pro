@@ -1,11 +1,6 @@
 # Komari Next Pro
 
-> **重要：部署前请先阅读 `docs/DEPLOY.md`。**
-> 
-> 如果只上传主题包而不部署所需后端（`unlock-probe` 和 `ip-meta`），部分面板会报错。
-
-
-Komari Next Pro 是一个 Komari 自定义主题，并附带一个可选的 `unlock-probe` 后端，用于流媒体解锁展示和节点卡片高级配置。
+Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础上修改，并附带一个可选的 `unlock-probe` 后端，用于流媒体解锁展示和节点卡片高级配置。
 
 ## 项目简介
 
@@ -157,19 +152,7 @@ systemd timer 参考说明位于：
 docs/systemd-timers.md
 ```
 
-## 安全提示
-
-在把你自己的 fork 公开前，请确认：
-
-- 已移除真实密码
-- 已移除真实生产 IP 与私有域名
-- 已移除私有部署 workflow
-- 已检查公开接口是否会泄露敏感数据
-- 未认证写接口不会暴露到公网
-
-更多内容请查看 [SECURITY.md](./SECURITY.md)。
-
-## 截图
+## 部分截图展示
 
 ### 首页 dashboard
 
@@ -193,8 +176,8 @@ docs/systemd-timers.md
 
 ## 当前状态
 
-仓库正在进行开源整理。  
-目前已经完成 theme 与 backend 的拆分，文档也在持续完善，适合继续朝公开发布方向推进。
+仓库完整开源。  
+不断优化改进。
 
 ## 贡献者
 
