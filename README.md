@@ -1,42 +1,42 @@
 # Komari Next Pro
 
-> **IMPORTANT: READ `docs/DEPLOY.md` BEFORE DEPLOYMENT.**
+> **重要：部署前请先阅读 `docs/DEPLOY.md`。**
 > 
-> If you deploy only the theme package without the required backends (`unlock-probe` and `ip-meta`), some panels will fail.
+> 如果只上传主题包而不部署所需后端（`unlock-probe` 和 `ip-meta`），部分面板会报错。
 
 
-Komari Next Pro is a custom theme for Komari, bundled with an optional `unlock-probe` backend for stream unlock display and advanced card configuration.
+Komari Next Pro 是一个 Komari 自定义主题，并附带一个可选的 `unlock-probe` 后端，用于流媒体解锁展示和节点卡片高级配置。
 
-## Overview
+## 项目简介
 
-This repository is split into two modules:
+本仓库分为两个模块：
 
-- `theme/` — the frontend theme for Komari
-- `unlock-probe/` — an optional backend service used for stream unlock probing and node card field configuration
+- `theme/` —— Komari 前端主题
+- `unlock-probe/` —— 可选后端，用于流媒体解锁探测与节点卡片字段配置
 
-You can use the theme alone, or deploy both modules together for the full experience.
+你可以只使用主题，也可以把主题和后端一起部署，获得完整体验。
 
-## Features
+## 功能特性
 
-### Theme
-- Modern homepage and dashboard layout
-- redesigned node cards and instance detail pages
-- richer IP information and network quality display
-- asset overview and more expressive visual presentation
-- Komari admin theme-managed configuration support
-- improved privacy controls for public display
-- multilingual UI base
+### 主题部分
+- 现代化主页与 dashboard 布局
+- 重做的节点卡片与详情页
+- 更丰富的 IP 信息与网络质量展示
+- 资产统计与更强的视觉表现
+- 可接入 Komari admin 的主题配置支持
+- 更好的公开展示隐私管理
+- 多语言 UI 基础
 
-### Optional unlock-probe backend
-- manual stream unlock trigger
-- cached latest result display
-- IPv4 / IPv6 result separation
-- per-node card field visibility configuration
-- scheduled batch probing support
-- login-protected write actions with masked public output
-- privacy-aware public result display for sensitive unlock details
+### 可选 unlock-probe 后端
+- 支持手动触发流媒体解锁检测
+- 展示最近一次缓存结果
+- IPv4 / IPv6 分离显示
+- 支持每节点卡片字段显隐配置
+- 支持定时批量检测
+- 写操作需登录，公开结果可脱敏输出
+- 对敏感解锁详情提供更适合公开访问的隐私保护展示
 
-## Repository Structure
+## 仓库结构
 
 ```text
 .
@@ -51,11 +51,11 @@ You can use the theme alone, or deploy both modules together for the full experi
 └── docker-compose.yml
 ```
 
-## Quick Start
+## 快速开始
 
-### Option A: Theme only
+### 方案 A：仅部署主题
 
-Use this if you only want the custom Komari UI.
+如果你只想使用 Komari Next Pro 的前端界面：
 
 ```bash
 cd theme
@@ -63,34 +63,34 @@ npm install
 npm run build
 ```
 
-Then upload the built theme assets together with `theme/komari-theme.json` into your Komari theme directory.
+构建完成后，将产物与 `theme/komari-theme.json` 一起上传到 Komari 的主题目录。
 
-### Option B: Theme + unlock-probe
+### 方案 B：主题 + unlock-probe 一起部署
 
-Use this if you want stream unlock display, cached unlock results, and node card field controls.
+如果你需要流媒体解锁展示、缓存结果和节点卡片字段控制：
 
-1. Build and deploy the theme from `theme/`
-2. Deploy `unlock-probe/`
-3. Reverse proxy `/unlock-probe/` to the backend service
-4. Configure environment variables such as:
+1. 构建并部署 `theme/`
+2. 部署 `unlock-probe/`
+3. 使用反向代理把 `/unlock-probe/` 转发到后端
+4. 配置环境变量，例如：
    - `KOMARI_BASE`
    - `KOMARI_USER`
    - `KOMARI_PASS`
    - `UNLOCK_PROBE_PORT`
 
-You can also start the backend with the provided `docker-compose.yml`.
+你也可以直接使用仓库中的 `docker-compose.yml` 启动后端。
 
-## Theme Module
+## Theme 模块
 
-The `theme/` directory contains the Komari theme itself.
+`theme/` 目录是 Komari 主题本体。
 
-Main goals:
-- improve homepage presentation
-- redesign node and detail page UI
-- expose richer IP / network quality views
-- support integration with a companion probing backend
+主要目标：
+- 优化首页展示
+- 重做节点卡片与详情页 UI
+- 提供更丰富的 IP / 网络质量信息
+- 支持与 companion probe 后端联动
 
-Build:
+构建方式：
 
 ```bash
 cd theme
@@ -98,17 +98,17 @@ npm install
 npm run build
 ```
 
-## Unlock Probe Module
+## Unlock Probe 模块
 
-The `unlock-probe/` directory contains the optional backend service.
+`unlock-probe/` 目录是可选后端服务。
 
-Main responsibilities:
-- execute probing workflows
-- expose latest cached unlock results
-- manage card field visibility settings
-- support scheduled batch execution
+主要职责：
+- 执行探测流程
+- 提供最近一次缓存解锁结果
+- 管理卡片字段显隐配置
+- 支持定时批量执行
 
-Example start:
+示例启动方式：
 
 ```bash
 cd unlock-probe
@@ -119,84 +119,84 @@ KOMARI_PASS=change-me \
 node server.mjs
 ```
 
-## One-line unlock-probe installer
+## 一键安装 unlock-probe
 
-You can install the optional unlock-probe backend directly from the latest release bundle:
+你可以直接通过 Release 附件安装可选的 unlock-probe 后端：
 
 ```bash
 curl -fsSL -o install-unlock-probe.sh https://raw.githubusercontent.com/fanchengliu/komari-next-pro/main/scripts/install-unlock-probe.sh
 bash install-unlock-probe.sh
 ```
 
-Environment overrides are supported, for example:
+也支持通过环境变量覆盖参数，例如：
 
 ```bash
 INSTALL_DIR=/opt/komari-next-pro-unlock-probe \
 KOMARI_BASE=http://127.0.0.1:25774 \
 KOMARI_USER=admin \
-KOMARI_PASS='your-password' \
+KOMARI_PASS='你的密码' \
 UNLOCK_PROBE_PORT=19116 \
 bash install-unlock-probe.sh
 ```
 
-## Deployment Notes
+## 部署说明
 
-### Reverse proxy
+### 反向代理
 
-A minimal Nginx example is included in:
+仓库中提供了一个最小 Nginx 示例：
 
 ```text
 docs/nginx-example.conf
 ```
 
-### Timers / scheduling
+### 定时任务
 
-A systemd timer note is included in:
+systemd timer 参考说明位于：
 
 ```text
 docs/systemd-timers.md
 ```
 
-## Security Notes
+## 安全提示
 
-Before making your own fork public:
+在把你自己的 fork 公开前，请确认：
 
-- remove real credentials
-- remove real production IPs and private domains
-- remove private deployment workflows
-- review public endpoints carefully
-- avoid exposing privileged write actions without authentication
+- 已移除真实密码
+- 已移除真实生产 IP 与私有域名
+- 已移除私有部署 workflow
+- 已检查公开接口是否会泄露敏感数据
+- 未认证写接口不会暴露到公网
 
-See [SECURITY.md](./SECURITY.md) for more details.
+更多内容请查看 [SECURITY.md](./SECURITY.md)。
 
-## Screenshots
+## 截图
 
-### Homepage dashboard
+### 首页 dashboard
 
-![Homepage dashboard](./docs/images/homepage-dashboard.jpg)
+![首页 dashboard](./docs/images/homepage-dashboard.jpg)
 
-### Instance status
+### 实例状态页
 
-![Instance status](./docs/images/instance-status.jpg)
+![实例状态页](./docs/images/instance-status.jpg)
 
-### IP information and stream unlock panel
+### IP 信息与流媒体解锁
 
-![IP information and stream unlock panel](./docs/images/ip-info-unlock.jpg)
+![IP 信息与流媒体解锁](./docs/images/ip-info-unlock.jpg)
 
-### IPv4 / IPv6 unlock result display
+### IPv4 / IPv6 解锁结果展示
 
-![IPv4 and IPv6 unlock display](./docs/images/stream-unlock-ipv6.jpg)
+![IPv4 / IPv6 解锁结果展示](./docs/images/stream-unlock-ipv6.jpg)
 
-### Card privacy and display settings
+### 卡片隐私与显示设置
 
-![Card privacy settings](./docs/images/card-privacy-settings.jpg)
+![卡片隐私与显示设置](./docs/images/card-privacy-settings.jpg)
 
-## Status
+## 当前状态
 
-This repository is being cleaned up for open-source release.  
-The current structure is already split into theme and backend modules, and the documentation is being refined for public deployment.
+仓库正在进行开源整理。  
+目前已经完成 theme 与 backend 的拆分，文档也在持续完善，适合继续朝公开发布方向推进。
 
-## Contributors
+## 贡献者
 
 - OpenClaw
 - Claude
@@ -204,4 +204,4 @@ The current structure is already split into theme and backend modules, and the d
 
 ## License
 
-See [LICENSE](./LICENSE).
+见 [LICENSE](./LICENSE)。
