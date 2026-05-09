@@ -46,14 +46,14 @@ if [ "$family" = "6" ]; then
   pending disney 'Disney+' "$trace_loc" pending 待接入 'IPv6 待接入'
 else
   ut=$(unlock_type "$(check_dns_1 disneyplus.com)" "$(check_dns_2 disneyplus.com)"); utype=${ut%|*}; utext=${ut#*|}
-  PreAssertion=$(curl $CURL_IP -A "$ua" -s --max-time 12 -X POST "https://disney.api.edge.bamgrid.com/devices" -H "authorization: Bearer ZGlzbmV5JmJyb3dzZXImMS4wLjA.Cu56AgSfBTDag5NiRA81oLHkDZfu5L3CKadnefEAY84" -H "content-type: application/json; charset=UTF-8" -d '{"deviceFamily":"browser","applicationRuntime":"chrome","deviceProfile":"windows","attributes":{}}' 2>&1)
+  PreAssertion=$(curl $CURL_IP -A "$ua" -s --max-time 12 -X POST "https://disney.api.edge.bamgrid.com/devices" -H "authorization: Bearer ${REDACTED_BEARER_TOKEN}" -H "content-type: application/json; charset=UTF-8" -d '{"deviceFamily":"browser","applicationRuntime":"chrome","deviceProfile":"windows","attributes":{}}' 2>&1)
   assertion=$(echo "$PreAssertion" | python3 -c 'import sys,json; 
 try: print(json.load(sys.stdin).get("assertion", ""))
 except Exception: print("")' 2>/dev/null)
   if [ -z "$assertion" ]; then err disney Disney+ "$trace_loc" unknown 未知 获取设备 assertion 失败
   else
     disneycookie="grant_type=urn:ietf:params:oauth:grant-type:token-exchange&latitude=0&longitude=0&platform=browser&subject_token=$assertion&subject_token_type=urn:bamtech:params:oauth:token-type:device"
-    TokenContent=$(curl $CURL_IP -A "$ua" -s --max-time 12 -X POST "https://disney.api.edge.bamgrid.com/token" -H "authorization: Bearer ZGlzbmV5JmJyb3dzZXImMS4wLjA.Cu56AgSfBTDag5NiRA81oLHkDZfu5L3CKadnefEAY84" -d "$disneycookie" 2>&1)
+    TokenContent=$(curl $CURL_IP -A "$ua" -s --max-time 12 -X POST "https://disney.api.edge.bamgrid.com/token" -H "authorization: Bearer ${REDACTED_BEARER_TOKEN}" -d "$disneycookie" 2>&1)
     if echo "$TokenContent" | grep -qE 'forbidden-location|403 ERROR'; then fail disney Disney+ "$trace_loc" idc 机房 'forbidden-location 或 403'
     else
       refreshToken=$(echo "$TokenContent" | python3 -c 'import sys,json; 
@@ -62,7 +62,7 @@ except Exception: print("")' 2>/dev/null)
       if [ -z "$refreshToken" ]; then partial disney Disney+ "$trace_loc" unknown 未知 未取得 refresh_token
       else
         disneycontent='{"query":"mutation refreshToken($input: RefreshTokenInput!) { refreshToken(refreshToken: $input) { activeSession { sessionId } } }","variables":{"input":{"refreshToken":"'"$refreshToken"'"}}}'
-        tmpresult=$(curl $CURL_IP -A "$ua" -sSL --max-time 12 "https://disney.api.edge.bamgrid.com/graph/v1/device/graphql" -H "authorization: Bearer ZGlzbmV5JmJyb3dzZXImMS4wLjA.Cu56AgSfBTDag5NiRA81oLHkDZfu5L3CKadnefEAY84" -H "content-type: application/json" -d "$disneycontent" 2>&1)
+        tmpresult=$(curl $CURL_IP -A "$ua" -sSL --max-time 12 "https://disney.api.edge.bamgrid.com/graph/v1/device/graphql" -H "authorization: Bearer ${REDACTED_BEARER_TOKEN}" -H "content-type: application/json" -d "$disneycontent" 2>&1)
         preview=$(curl $CURL_IP -s -o /dev/null -L --max-time 10 -w '%{url_effective}' https://disneyplus.com 2>&1)
         region=$(echo "$tmpresult" | grep -o '"countryCode":"[A-Z][A-Z]"' | head -1 | cut -d '"' -f4); [ -z "$region" ] && region="$trace_loc"
         if echo "$tmpresult" | grep -q 'inSupportedLocation.*true'; then ok disney Disney+ "$region" "$utype" "$utext" 支持地区
