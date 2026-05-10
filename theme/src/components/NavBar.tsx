@@ -6,6 +6,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 import { useTheme } from '@/contexts/ThemeContext';
 import DarkModeToggle from "./DarkModeToggle";
 import ResidualValueCalculator from "./ResidualValueCalculator";
+import ExpiryTimeline from "./ExpiryTimeline";
 import Link from "next/link";
 import { usePublicInfo } from "@/contexts/PublicInfoContext";
 import { useTranslation } from "react-i18next";
@@ -39,6 +40,7 @@ const NavBar = () => {
         {/* Actions */}
         <div className="flex items-center gap-2 min-h-9 shrink-0">
           {showAssetCalculatorButton ? <ResidualValueCalculator /> : null}
+          <ExpiryTimeline />
           <DarkModeToggle />
           <ThemeSwitcher />
           <LanguageSwitch />
