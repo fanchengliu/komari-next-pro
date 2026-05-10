@@ -11,7 +11,6 @@ interface ThemeConfig {
   cardLayout: CardLayout;
   backgroundImageUrl?: string;
   logoImageUrl?: string;
-  footerBrandLine?: string;
   showAssetCalculatorButton?: boolean;
 }
 
@@ -40,7 +39,6 @@ interface ManagedThemeSettings {
   cardLayout?: CardLayout;
   backgroundImageUrl?: string;
   logoImageUrl?: string;
-  footerBrandLine?: string;
   showAssetCalculatorButton?: boolean;
   streamUnlock?: Partial<StreamUnlockConfig>;
   statusCardsVisibility?: Partial<StatusCardsVisibility>;
@@ -67,7 +65,6 @@ const DEFAULT_THEME_CONFIG: ThemeConfig = {
   cardLayout: 'classic',
   backgroundImageUrl: '',
   logoImageUrl: '',
-  footerBrandLine: '',
   showAssetCalculatorButton: true,
 };
 
@@ -100,7 +97,6 @@ function normalizeManagedThemeSettings(input: any): ManagedThemeSettings {
   if (typeof input.cardLayout === 'string') result.cardLayout = input.cardLayout as CardLayout;
   if (typeof input.backgroundImageUrl === 'string') result.backgroundImageUrl = input.backgroundImageUrl;
   if (typeof input.logoImageUrl === 'string') result.logoImageUrl = input.logoImageUrl;
-  if (typeof input.footerBrandLine === 'string') result.footerBrandLine = input.footerBrandLine;
   if (typeof input.showAssetCalculatorButton === 'boolean') result.showAssetCalculatorButton = input.showAssetCalculatorButton;
   if (input.streamUnlock && typeof input.streamUnlock === 'object') {
     result.streamUnlock = {
@@ -140,7 +136,6 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
             cardLayout: parsed.cardLayout || 'classic',
             backgroundImageUrl: parsed.backgroundImageUrl || '',
             logoImageUrl: parsed.logoImageUrl || '',
-            footerBrandLine: parsed.footerBrandLine || '',
             showAssetCalculatorButton: parsed.showAssetCalculatorButton ?? true,
           };
         } catch {
@@ -177,7 +172,6 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     cardLayout: managedThemeSettings.cardLayout ?? localThemeConfig.cardLayout ?? DEFAULT_THEME_CONFIG.cardLayout,
     backgroundImageUrl: managedThemeSettings.backgroundImageUrl ?? localThemeConfig.backgroundImageUrl ?? '',
     logoImageUrl: managedThemeSettings.logoImageUrl ?? localThemeConfig.logoImageUrl ?? '',
-    footerBrandLine: managedThemeSettings.footerBrandLine ?? localThemeConfig.footerBrandLine ?? '',
     showAssetCalculatorButton: managedThemeSettings.showAssetCalculatorButton ?? localThemeConfig.showAssetCalculatorButton ?? true,
   };
 

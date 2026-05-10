@@ -37,12 +37,6 @@
         "default": ""
       },
       {
-        "key": "footerBrandLine",
-        "type": "text",
-        "label": "Footer 品牌文案",
-        "default": "技术支持 Komari-Next and LIU"
-      },
-      {
         "key": "statusCardsVisibility.currentTime",
         "type": "bool",
         "label": "显示当前时间",
