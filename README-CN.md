@@ -6,7 +6,7 @@ Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础�
 
 本仓库分为两个模块：
 
-- `theme/` —— Komari 前端主题
+- `theme/` —— Komari 前端主题（含源码与编译产物）
 - `unlock-probe/` —— 可选后端，用于流媒体解锁探测与节点卡片字段配置
 
 你可以只使用主题，也可以把主题和后端一起部署，获得完整体验。
@@ -22,6 +22,16 @@ Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础�
 - 更好的公开展示隐私管理
 - 多语言 UI 基础
 
+### 2.0 新增功能
+- 🎭 **心情与养成系统** — 基于 CPU/内存负载的实时心情表情 + 基于运行时间的等级徽章（Lv1 新生 → Lv6 传说）
+- ⚙️ **每台服务器独立控制** — 通过齿轮面板单独开关心情/等级显示
+- 🎛️ **后台全局开关** — 管理面板一键开关心情与养成系统
+- 💰 **资产计算器增强** — 多币种支持、弹窗自适应高度
+- 📊 **月度流量精度优化** — 显示一位小数（如 28.3 GB/10.0 TB）
+- 🎨 **6 种配色主题** — Default、Ocean、Sunset、Forest、Midnight、Rose
+- 🌙 **深色模式** — 完整深色模式支持
+- 📱 **移动端响应式** — 全屏幕尺寸适配
+
 ### 可选 unlock-probe 后端
 - 支持手动触发流媒体解锁检测
 - 展示最近一次缓存结果
@@ -36,6 +46,10 @@ Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础�
 ```text
 .
 ├── theme/
+│   ├── src/              # 主题源码
+│   ├── dist/             # 编译产物（可直接部署）
+│   ├── komari-theme.json # 主题配置文件
+│   └── preview.png       # 预览图
 ├── unlock-probe/
 ├── docs/
 ├── scripts/
@@ -48,9 +62,23 @@ Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础�
 
 ## 快速开始
 
-### 方案 A：仅部署主题
+### 方案 A：直接使用编译产物（推荐）
 
-如果你只想使用 Komari Next Pro 的前端界面：
+下载 [最新 Release](https://github.com/fanchengliu/komari-next-pro/releases) 中的 `komari-next-pro-v2.0.0.tar.gz`，解压到 Komari 主题目录即可：
+
+```bash
+tar xzf komari-next-pro-v2.0.0.tar.gz -C /path/to/komari/data/theme/
+```
+
+或者直接使用仓库中的 `theme/dist/` 目录：
+
+```bash
+cp -r theme/dist /path/to/komari/data/theme/komari-next-pro/dist
+cp theme/komari-theme.json /path/to/komari/data/theme/komari-next-pro/
+cp theme/preview.png /path/to/komari/data/theme/komari-next-pro/
+```
+
+### 方案 B：从源码构建
 
 ```bash
 cd theme
@@ -60,7 +88,7 @@ npm run build
 
 构建完成后，将产物与 `theme/komari-theme.json` 一起上传到 Komari 的主题目录。
 
-### 方案 B：主题 + unlock-probe 一起部署
+### 方案 C：主题 + unlock-probe 一起部署
 
 如果你需要流媒体解锁展示、缓存结果和节点卡片字段控制：
 
