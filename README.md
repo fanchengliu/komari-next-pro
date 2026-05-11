@@ -182,6 +182,18 @@ docs/systemd-timers.md
 
 ## 部分截图展示
 
+### 主页状态栏细节
+
+![主页状态栏细节](./docs/images/status-bar-detail.jpg)
+
+### 子页本地服务快照
+
+![子页本地服务快照](./docs/images/local-service-snapshot.jpg)
+
+### 心情与等级系统
+
+![心情与等级系统](./docs/images/mood-level-system.jpg)
+
 ### 首页 dashboard
 
 ![首页 dashboard](./docs/images/homepage-dashboard.jpg)
