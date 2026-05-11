@@ -67,6 +67,18 @@
         "default": true
       },
       {
+        "key": "showMoodSystem",
+        "type": "bool",
+        "label": "显示心情系统",
+        "default": true
+      },
+      {
+        "key": "showLevelSystem",
+        "type": "bool",
+        "label": "显示等级系统",
+        "default": true
+      },
+      {
         "key": "streamUnlock.mode",
         "type": "option",
         "label": "流媒体解锁模式",
@@ -162,19 +174,6 @@
         "default": true
       },
       {
-        "key": "footerBrandLine",
-        "type": "string",
-        "name": {
-          "zh-CN": "Footer 品牌文案",
-          "en-US": "Footer Brand Line"
-        },
-        "help": {
-          "zh-CN": "底栏显示的品牌文案",
-          "en-US": "Brand line shown in the footer"
-        },
-        "default": "技术支持 Komari-Next and LIU"
-      },
-      {
         "type": "title",
         "name": "状态卡显示"
       },
@@ -234,20 +233,33 @@
       },
       {
         "type": "title",
-        "name": "自定义文本"
+        "name": "心情与养成"
       },
       {
-        "key": "customTexts",
-        "type": "custom",
+        "key": "showMoodSystem",
+        "type": "switch",
         "name": {
-          "zh-CN": "界面文案覆盖",
-          "en-US": "Custom Text Overrides"
+          "zh-CN": "显示心情系统",
+          "en-US": "Show Mood System"
         },
         "help": {
-          "zh-CN": "覆盖主题内部分文案，可留空",
-          "en-US": "Override specific theme texts, can be left empty"
+          "zh-CN": "在节点卡片上显示基于负载的心情表情",
+          "en-US": "Show mood emoji on node cards based on load average"
         },
-        "default": ""
+        "default": true
+      },
+      {
+        "key": "showLevelSystem",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示等级系统",
+          "en-US": "Show Level System"
+        },
+        "help": {
+          "zh-CN": "在节点卡片上显示基于运行时间的等级",
+          "en-US": "Show level badge on node cards based on uptime"
+        },
+        "default": true
       },
       {
         "type": "title",
@@ -371,19 +383,6 @@
         "default": true
       },
       {
-        "key": "footerBrandLine",
-        "type": "string",
-        "name": {
-          "zh-CN": "Footer 品牌文案",
-          "en-US": "Footer Brand Line"
-        },
-        "help": {
-          "zh-CN": "底栏显示的品牌文案",
-          "en-US": "Brand line shown in the footer"
-        },
-        "default": "技术支持 Komari-Next and LIU"
-      },
-      {
         "type": "title",
         "name": "状态卡显示"
       },
@@ -443,20 +442,33 @@
       },
       {
         "type": "title",
-        "name": "自定义文本"
+        "name": "心情与养成"
       },
       {
-        "key": "customTexts",
-        "type": "custom",
+        "key": "showMoodSystem",
+        "type": "switch",
         "name": {
-          "zh-CN": "界面文案覆盖",
-          "en-US": "Custom Text Overrides"
+          "zh-CN": "显示心情系统",
+          "en-US": "Show Mood System"
         },
         "help": {
-          "zh-CN": "覆盖主题内部分文案，可留空",
-          "en-US": "Override specific theme texts, can be left empty"
+          "zh-CN": "在节点卡片上显示基于负载的心情表情",
+          "en-US": "Show mood emoji on node cards based on load average"
         },
-        "default": ""
+        "default": true
+      },
+      {
+        "key": "showLevelSystem",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示等级系统",
+          "en-US": "Show Level System"
+        },
+        "help": {
+          "zh-CN": "在节点卡片上显示基于运行时间的等级",
+          "en-US": "Show level badge on node cards based on uptime"
+        },
+        "default": true
       },
       {
         "type": "title",
@@ -580,19 +592,6 @@
         "default": true
       },
       {
-        "key": "footerBrandLine",
-        "type": "string",
-        "name": {
-          "zh-CN": "Footer 品牌文案",
-          "en-US": "Footer Brand Line"
-        },
-        "help": {
-          "zh-CN": "底栏显示的品牌文案",
-          "en-US": "Brand line shown in the footer"
-        },
-        "default": "技术支持 Komari-Next and LIU"
-      },
-      {
         "type": "title",
         "name": "状态卡显示"
       },
@@ -652,20 +651,33 @@
       },
       {
         "type": "title",
-        "name": "自定义文本"
+        "name": "心情与养成"
       },
       {
-        "key": "customTexts",
-        "type": "custom",
+        "key": "showMoodSystem",
+        "type": "switch",
         "name": {
-          "zh-CN": "界面文案覆盖",
-          "en-US": "Custom Text Overrides"
+          "zh-CN": "显示心情系统",
+          "en-US": "Show Mood System"
         },
         "help": {
-          "zh-CN": "覆盖主题内部分文案，可留空",
-          "en-US": "Override specific theme texts, can be left empty"
+          "zh-CN": "全局开关：在节点卡片上显示基于负载的心情表情",
+          "en-US": "Global toggle: show mood emoji on node cards"
         },
-        "default": ""
+        "default": true
+      },
+      {
+        "key": "showLevelSystem",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示等级系统",
+          "en-US": "Show Level System"
+        },
+        "help": {
+          "zh-CN": "全局开关：在节点卡片上显示基于运行时间的等级",
+          "en-US": "Global toggle: show level badge on node cards"
+        },
+        "default": true
       },
       {
         "type": "title",
@@ -789,19 +801,6 @@
         "default": true
       },
       {
-        "key": "footerBrandLine",
-        "type": "string",
-        "name": {
-          "zh-CN": "Footer 品牌文案",
-          "en-US": "Footer Brand Line"
-        },
-        "help": {
-          "zh-CN": "底栏显示的品牌文案",
-          "en-US": "Brand line shown in the footer"
-        },
-        "default": "技术支持 Komari-Next and LIU"
-      },
-      {
         "type": "title",
         "name": "状态卡显示"
       },
@@ -861,20 +860,33 @@
       },
       {
         "type": "title",
-        "name": "自定义文本"
+        "name": "心情与养成"
       },
       {
-        "key": "customTexts",
-        "type": "custom",
+        "key": "showMoodSystem",
+        "type": "switch",
         "name": {
-          "zh-CN": "界面文案覆盖",
-          "en-US": "Custom Text Overrides"
+          "zh-CN": "显示心情系统",
+          "en-US": "Show Mood System"
         },
         "help": {
-          "zh-CN": "覆盖主题内部分文案，可留空",
-          "en-US": "Override specific theme texts, can be left empty"
+          "zh-CN": "全局开关：在节点卡片上显示基于负载的心情表情",
+          "en-US": "Global toggle: show mood emoji on node cards"
         },
-        "default": ""
+        "default": true
+      },
+      {
+        "key": "showLevelSystem",
+        "type": "switch",
+        "name": {
+          "zh-CN": "显示等级系统",
+          "en-US": "Show Level System"
+        },
+        "help": {
+          "zh-CN": "全局开关：在节点卡片上显示基于运行时间的等级",
+          "en-US": "Global toggle: show level badge on node cards"
+        },
+        "default": true
       },
       {
         "type": "title",

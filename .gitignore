@@ -3,6 +3,8 @@ node_modules/
 
 # build outputs
 dist/
+!theme/dist/
+!theme/dist/**
 .next/
 out/
 
