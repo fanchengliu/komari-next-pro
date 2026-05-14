@@ -1,6 +1,6 @@
 # Komari Next Pro
 
-Komari Next Pro 是一个 Komari 自定义主题，在 `komari-next` 的基础上深度重构，并附带一个可选的 `unlock-probe` 后端，用于流媒体解锁展示和节点卡片高级配置。
+Komari Next Pro 是一个 Komari 自定义主题，在 komari-next 的基础上深度重构，重新优化设计，深度重构，开发许多有趣功能的主题。
 
 ## 项目简介
 
