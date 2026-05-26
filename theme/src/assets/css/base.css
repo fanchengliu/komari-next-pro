@@ -1,0 +1,13 @@
+:root{
+  --komari-liu-bg: rgba(255,255,255,.72);
+  --komari-liu-bg-strong: rgba(255,255,255,.9);
+  --komari-liu-border: rgba(148,163,184,.25);
+  --komari-liu-text: #172033;
+  --komari-liu-muted: #64748b;
+  --komari-liu-primary: #7c9cff;
+  --komari-liu-radius: 18px;
+  --komari-liu-shadow: 0 18px 45px rgba(30,41,59,.12);
+}
+html{scroll-behavior:smooth;}
+body{color:var(--komari-liu-text);}
+*,*::before,*::after{box-sizing:border-box;}

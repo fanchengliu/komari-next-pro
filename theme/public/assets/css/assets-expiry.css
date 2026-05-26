@@ -1,0 +1,3 @@
+.komari-liu-expiry-warning{color:#f59e0b;}.komari-liu-expiry-danger{color:#ef4444;}
+.komari-liu-expiry-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;font-size:11px;color:var(--komari-liu-muted);}
+.komari-liu-expiry-strip span{padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.62);border:1px solid var(--komari-liu-border);}

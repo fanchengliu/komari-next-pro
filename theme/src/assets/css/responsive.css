@@ -1,0 +1,4 @@
+@media (max-width: 768px){
+  :root{--komari-liu-radius:14px;}
+  .komari-liu-card{box-shadow:0 12px 28px rgba(30,41,59,.10);}
+}

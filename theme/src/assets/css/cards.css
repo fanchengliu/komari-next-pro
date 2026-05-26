@@ -1,0 +1,5 @@
+.komari-liu-card{position:relative;background:var(--komari-liu-bg);border:1px solid var(--komari-liu-border);border-radius:var(--komari-liu-radius);box-shadow:var(--komari-liu-shadow);backdrop-filter:blur(18px);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;overflow:hidden;}
+.komari-liu-card:hover{transform:translateY(-2px);box-shadow:0 22px 55px rgba(30,41,59,.16);border-color:rgba(124,156,255,.34);}
+.komari-liu-card-glow{position:absolute;inset:auto -20% -45% -20%;height:70%;pointer-events:none;background:radial-gradient(circle,rgba(124,156,255,.16),transparent 64%);}
+.komari-liu-health-dot{position:absolute;top:10px;right:10px;width:10px;height:10px;border-radius:99px;box-shadow:0 0 0 4px rgba(255,255,255,.55);}
+.komari-liu-health-dot.ok{background:#22c55e;}.komari-liu-health-dot.warn{background:#f59e0b;}.komari-liu-health-dot.danger{background:#ef4444;}

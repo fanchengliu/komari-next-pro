@@ -1,0 +1,5 @@
+.komari-liu-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:rgba(15,23,42,.28);padding:18px;}
+.komari-liu-modal[hidden]{display:none;}
+.komari-liu-modal-card{width:min(460px,100%);padding:16px;border:1px solid var(--komari-liu-border);border-radius:22px;background:var(--komari-liu-bg-strong);box-shadow:var(--komari-liu-shadow);backdrop-filter:blur(20px);color:var(--komari-liu-text);}
+.komari-liu-modal-card header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.komari-liu-modal-card header button{border:0;background:transparent;font-size:22px;cursor:pointer;color:var(--komari-liu-muted);}
