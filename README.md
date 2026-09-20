@@ -219,6 +219,10 @@ docs/systemd-timers.md
 仓库完整开源。  
 不断优化改进。
 
+### Next Pro v2 维护补丁
+
+`theme/patches/` 保留面向 Next Pro v2 正式版的独立兼容补丁。当前卡片指标补丁用于统一延迟与丢包行的布局，并避免月度流量长数值撑宽或溢出节点卡片。
+
 ## 贡献者
 
 - OpenClaw
