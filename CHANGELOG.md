@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.1
+
+- Add the repository icon/link beside the fixed Komari Next Pro footer.
+- Add a bilingual VitePress documentation website with local search, appearance switch and mobile navigation.
+- Separate website and theme builds, with explicit Vercel configuration and the legacy `theme/public` publishing path.
+- Add acknowledgements to the project README.
+
 ## 3.0.0 — Komari Next Pro
 
 Major independent rewrite of Komari Next Pro, using the independently implemented komari-ds 2.2.2 codebase.

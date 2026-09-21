@@ -22,8 +22,20 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - run: npm run build
+      - run: npm run docs:build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      - name: Verify documentation website
+        shell: bash
+        run: |
+          npm run docs:preview > /tmp/komari-docs-preview.log 2>&1 &
+          docs_pid=$!
+          trap 'kill "$docs_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail http://127.0.0.1:5178/ > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/verify-docs.mjs
       - run: npm run package
       - run: node scripts/audit-public.mjs --packages
       - uses: actions/upload-artifact@v4

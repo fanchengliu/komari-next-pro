@@ -17,7 +17,7 @@ Komari Next Pro 3.0 is an independently implemented React/TypeScript rewrite of 
 - Card transparency, image/video backgrounds and a first-use configuration wizard.
 - Simplified Chinese, Traditional Chinese, English, Japanese and Korean.
 
-Download `komari-next-pro-3.0.0-theme.zip` from Releases, upload it in Komari's theme manager and select **Komari Next Pro**. GitHub's automatically generated source archive is not an installable theme.
+Download `komari-next-pro-3.0.1-theme.zip` from Releases, upload it in Komari's theme manager and select **Komari Next Pro**. GitHub's automatically generated source archive is not an installable theme.
 
 The internal theme ID remains `komari-ds` to preserve existing DS settings. Core monitoring, charts, comparisons and the globe work without the optional companion service. Server-side media storage and manual node probes require the [extension](docs/EXTENSION.md). Compatibility baseline: Komari 1.5.0.
 
@@ -37,3 +37,7 @@ npm run dev
 Visit `http://127.0.0.1:5173`; local demo credentials are `demo / demo`. Then run `npm test`, `npm run build`, and `npm run test:e2e`. On Linux/macOS, install Chromium with `npx playwright install chromium`; Windows uses Edge by default, or set `DS_BROWSER`. `npm run package` creates theme, source and extension ZIPs with SHA-256 checksums.
 
 MIT-licensed code; upstream notices are retained. Third-party assets and geographic databases keep their own licenses. See [provenance](docs/PROVENANCE.md), [contributing](CONTRIBUTING.md), and [security](SECURITY.md).
+
+## Acknowledgements
+
+Thanks to [Komari](https://github.com/komari-monitor/komari), [Komari-next](https://github.com/tonyliuzj/komari-next), and everyone who reports issues, contributes pull requests, or shares ideas.

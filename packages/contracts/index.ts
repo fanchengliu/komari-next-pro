@@ -1,5 +1,5 @@
 import { z } from "zod";
-export const VERSION = "3.0.0";
+export const VERSION = "3.0.1";
 export const locales = ["zh-CN", "zh-TW", "en", "ja", "ko"] as const;
 export type Locale = (typeof locales)[number];
 export const API = "/komari-ds-api/v1";

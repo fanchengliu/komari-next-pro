@@ -1,5 +1,6 @@
 import { SetupTrigger } from "../features/setup/SetupWizard";
 import { BRAND } from "../brand";
+import { siGithub } from "simple-icons";
 import { LanguageMenu } from "../ui/LanguageSelect";
 import { Activity, Columns3, Globe2, Layers, Grid2X2 } from "lucide-react";
 import V from "../ui/v2.module.css";
@@ -232,7 +233,27 @@ export function App() {
           </ErrorBoundary>
           <MainNav mobile />
           <footer className={S.footer}>
-            {BRAND.name} · {BRAND.attribution}
+            <span>
+              {BRAND.name} · {BRAND.attribution}
+            </span>
+            <a
+              className={S.footerGithub}
+              href={BRAND.repository}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Komari Next Pro GitHub"
+              title="GitHub"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="17"
+                height="17"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d={siGithub.path} />
+              </svg>
+            </a>
           </footer>
           <Dialogs />
           <Suspense fallback={null}>

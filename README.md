@@ -1,7 +1,7 @@
 <p align="center"><img src="docs/brand/cover.png" alt="Komari Next Pro — A glass theme for Komari" width="100%"></p>
 
 <p align="center"><b>你的节点，你的网络，一眼看清。</b><br>玻璃卡片 · 全球节点 · 网络对比 · 个性化外观</p>
-<p align="center"><a href="README.en.md">English</a> · <a href="https://github.com/fanchengliu/komari-next-pro/releases">下载</a> · <a href="docs/INSTALL.md">安装</a> · <a href="docs/EXTENSION.md">配套扩展</a> · <a href="docs/MIGRATION.md">升级与回退</a></p>
+<p align="center"><a href="README.en.md">English</a> · <a href="https://komari-next-pro.vercel.app/">文档站</a> · <a href="https://github.com/fanchengliu/komari-next-pro/releases">下载</a> · <a href="docs/INSTALL.md">安装</a> · <a href="docs/EXTENSION.md">配套扩展</a> · <a href="docs/MIGRATION.md">升级与回退</a></p>
 
 # Komari Next Pro 
 
@@ -28,7 +28,7 @@ Komari Next Pro 3.0 是本仓库的全新独立重写版本。当前前端、数
 
 ## 安装
 
-1. 在 [Releases](https://github.com/fanchengliu/komari-next-pro/releases) 下载 `komari-next-pro-3.0.0-theme.zip`。
+1. 在 [Releases](https://github.com/fanchengliu/komari-next-pro/releases) 下载 `komari-next-pro-3.0.1-theme.zip`。
 2. 到 Komari 管理后台上传主题 ZIP，选择 **Komari Next Pro**。
 3. 返回首页，通过首次配置向导选择布局与背景。
 
@@ -85,3 +85,7 @@ docs/             安装、迁移、数据与素材来源
 欢迎提交问题与 PR，见 [贡献指南](CONTRIBUTING.md) 和 [安全反馈](SECURITY.md)。
 
 代码采用 [MIT License](LICENSE)。原项目版权声明保留；地图数据库、图标及依赖遵循各自许可，详见 [来源说明](docs/PROVENANCE.md)、[地图许可](docs/GEODATA.md) 和 [第三方许可](docs/THIRD_PARTY_NOTICES.md)。默认背景与品牌素材为本项目新制作，不包含个人站点的动漫媒体或私人部署资料。
+
+## 致谢
+
+感谢 [Komari](https://github.com/komari-monitor/komari)、[Komari-next](https://github.com/tonyliuzj/komari-next)，以及所有反馈 Issue、提交 PR 和分享建议的朋友。

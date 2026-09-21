@@ -1,6 +1,6 @@
 {
   "name": "komari-next-pro",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -17,7 +17,10 @@
     "package": "node scripts/package.mjs",
     "locales": "node scripts/build-locales.mjs",
     "audit:public": "node scripts/audit-public.mjs --packages",
-    "verify:source": "node scripts/verify-source.mjs"
+    "verify:source": "node scripts/verify-source.mjs",
+    "docs:dev": "node scripts/prepare-docs-assets.mjs && vitepress dev site --host 127.0.0.1 --port 5178",
+    "docs:build": "node scripts/prepare-docs-assets.mjs && vitepress build site && node scripts/sync-docs-public.mjs",
+    "docs:preview": "vitepress preview site --host 127.0.0.1 --port 5178"
   },
   "dependencies": {
     "@fastify/multipart": "10.1.1",
@@ -49,6 +52,7 @@
     "tsx": "4.23.15",
     "typescript": "7.0.2",
     "vite": "8.3.0",
+    "vitepress": "1.6.4",
     "vitest": "5.0.1",
     "ws": "8.21.3"
   },

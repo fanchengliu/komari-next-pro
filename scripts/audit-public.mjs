@@ -9,6 +9,7 @@ const skip = new Set([
   "releases",
   "test-results",
   "playwright-report",
+  ".vercel",
 ]);
 let inspected = 0;
 const forbidden = [
@@ -19,6 +20,7 @@ const forbidden = [
 async function walk(dir) {
   for (const e of await readdir(dir, { withFileTypes: true })) {
     if (skip.has(e.name)) continue;
+    if (dir.endsWith(".vitepress") && e.name === "cache") continue;
     const p = join(dir, e.name);
     if (e.isDirectory()) await walk(p);
     else {

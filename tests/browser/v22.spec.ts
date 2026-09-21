@@ -339,6 +339,15 @@ test("cancelling setup leaves site settings untouched and brand config cannot re
   await expect(page.locator("footer")).toHaveText(
     "Komari Next Pro · Powered by Komari Monitor.",
   );
+  const repositoryLink = page
+    .locator("footer")
+    .getByRole("link", { name: "Komari Next Pro GitHub", exact: true });
+  await expect(repositoryLink).toHaveAttribute(
+    "href",
+    "https://github.com/fanchengliu/komari-next-pro",
+  );
+  await expect(repositoryLink).toHaveAttribute("target", "_blank");
+  await expect(repositoryLink).toHaveAttribute("rel", /noopener/);
   expect(
     await page
       .locator("footer")

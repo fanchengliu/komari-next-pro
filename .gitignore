@@ -14,3 +14,6 @@ playwright-report/
 *.sqlite*
 *.pem
 *.key
+site/.vitepress/dist/
+site/.vitepress/cache/
+.vercel/

@@ -45,6 +45,7 @@ async function run(args) {
 }
 await run(["ci", "--ignore-scripts", "--no-audit", "--no-fund"]);
 await run(["run", "build"]);
+await run(["run", "docs:build"]);
 const theme = unzipSync(
   await readFile(`releases/komari-next-pro-${version}-theme.zip`),
 );

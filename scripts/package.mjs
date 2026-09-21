@@ -24,6 +24,7 @@ async function collect(path, prefix, target) {
     if (
       entry.name === "node_modules" ||
       entry.name === ".git" ||
+      (path.endsWith(".vitepress") && ["dist", "cache"].includes(entry.name)) ||
       entry.name.startsWith(".env")
     )
       continue;
@@ -57,6 +58,8 @@ for (const dir of [
   "docs",
   "deploy",
   ".github",
+  "site",
+  "theme",
 ])
   await collect(join(root, dir), dir + "/", source);
 for (const file of [
@@ -66,6 +69,7 @@ for (const file of [
   "vitest.config.ts",
   "playwright.config.ts",
   "komari-theme.json",
+  "vercel.json",
   "README.md",
   "README.en.md",
   "LICENSE",

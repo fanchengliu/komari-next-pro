@@ -1628,6 +1628,11 @@
 }
 .footer {
   max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin: 26px auto 16px;
   padding: 19px 24px !important;
   border: 1px solid var(--line);
@@ -1635,6 +1640,22 @@
   background: var(--glass);
   backdrop-filter: blur(18px);
   box-shadow: 0 10px 34px #163f6912;
+}
+.footerGithub {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.footerGithub:hover,
+.footerGithub:focus-visible {
+  color: var(--accent);
+  background: var(--panel);
 }
 @media (max-width: 1320px) {
   .footer {
