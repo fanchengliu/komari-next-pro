@@ -1,0 +1,19 @@
+{
+  "name": "Komari Next Pro",
+  "short": "komari-ds",
+  "description": {
+    "zh-CN": "独立实现的玻璃风格 Komari 主题，含全球节点、网络对比和个性化外观。",
+    "en": "An independent glass theme for Komari with a global globe, network comparisons and personal layouts."
+  },
+  "version": "3.0.0",
+  "author": "LFC",
+  "preview": "preview.png",
+  "configuration": {
+    "type": "redirect",
+    "name": {
+      "zh-CN": "主题设置",
+      "en": "Theme settings"
+    },
+    "data": "theme/settings"
+  }
+}

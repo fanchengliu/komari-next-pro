@@ -1,0 +1,20 @@
+[Unit]
+Description=komari-ds extension
+After=network.target
+
+[Service]
+Type=simple
+User=komari-ds
+Group=komari-ds
+WorkingDirectory=/opt/komari-ds
+EnvironmentFile=/etc/komari-ds.env
+ExecStart=/usr/bin/node --import tsx apps/extension/src/main.ts
+Restart=on-failure
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/komari-ds
+
+[Install]
+WantedBy=multi-user.target

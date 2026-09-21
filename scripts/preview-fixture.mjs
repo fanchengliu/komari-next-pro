@@ -1,0 +1,14 @@
+// Production-build preview against the local synthetic demo services only.
+import http from 'node:http';
+import {createReadStream} from 'node:fs';
+import {stat} from 'node:fs/promises';
+import {resolve,sep,extname} from 'node:path';
+import {WebSocket,WebSocketServer} from 'ws';
+const root=resolve('dist'),origin='http://127.0.0.1:5177';
+const server=http.createServer(async(req,res)=>{try{
+ const url=new URL(req.url,origin),api=url.pathname.startsWith('/api/')||/^\/(admin|terminal)(\/|$)/.test(url.pathname),extension=url.pathname.startsWith('/komari-ds-api/');
+ if(api||extension){const headers={...req.headers,host:'127.0.0.1'};if(headers.origin===origin)headers.origin='http://127.0.0.1:5173';const remote=http.request('http://127.0.0.1:'+(extension?5175:5174)+req.url,{method:req.method,headers},r=>{res.writeHead(r.statusCode,r.headers);r.pipe(res)});remote.on('error',()=>{res.writeHead(502);res.end()});req.pipe(remote);return}
+ const prefix='/themes/komari-ds/dist/';const asset=url.pathname.startsWith(prefix);const path=url.pathname.startsWith('/media/')?resolve(root,decodeURIComponent(url.pathname.slice(1))):asset?resolve(root,decodeURIComponent(url.pathname.slice(prefix.length))):resolve(root,'index.html');if(!path.startsWith(root+sep)){res.writeHead(403);res.end();return}let info;try{info=await stat(path)}catch{res.writeHead(404);res.end();return}if(!info.isFile()){res.writeHead(404);res.end();return}
+ const type={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.mp4':'video/mp4','.json':'application/json','.txt':'text/plain'}[extname(path)]??'application/octet-stream';const headers={'Content-Type':type,'Cache-Control':'no-store','Accept-Ranges':'bytes'};const range=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range??'');if(range){const start=+range[1],end=range[2]?Math.min(+range[2],info.size-1):info.size-1;if(start>end){res.writeHead(416);res.end();return}res.writeHead(206,{...headers,'Content-Length':end-start+1,'Content-Range':`bytes ${start}-${end}/${info.size}`});createReadStream(path,{start,end}).pipe(res)}else{res.writeHead(200,{...headers,'Content-Length':info.size});createReadStream(path).pipe(res)}
+ }catch{res.writeHead(500);res.end()}});
+const wss=new WebSocketServer({server,path:'/api/rpc2'});wss.on('connection',(client,req)=>{const remote=new WebSocket('ws://127.0.0.1:5174/api/rpc2',{headers:{cookie:req.headers.cookie??''}}),pending=[];remote.on('open',()=>{for(const m of pending)remote.send(m)});client.on('message',m=>remote.readyState===WebSocket.OPEN?remote.send(m.toString()):pending.push(m.toString()));remote.on('message',m=>{if(client.readyState===WebSocket.OPEN)client.send(m.toString())});remote.on('error',()=>client.close());remote.on('close',()=>client.close());client.on('close',()=>remote.close())});server.listen(5177,'127.0.0.1',()=>console.log('Production fixture preview: '+origin));

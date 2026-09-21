@@ -1,0 +1,60 @@
+name: Verify and package
+on:
+  push:
+    branches: [main, 'codex/**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run package
+      - run: node scripts/audit-public.mjs --packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: komari-next-pro-packages
+          path: releases/
+          retention-days: 14
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: komari-next-pro-packages
+          path: release-files
+      - name: Publish versioned release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          version=$(node -p "require('./package.json').version")
+          tag="v${version}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; leaving its assets untouched."
+          else
+            gh release create "$tag" release-files/*.zip release-files/SHA256SUMS release-files/manifest.json --target "$GITHUB_SHA" --title "Komari Next Pro $version" --notes-file docs/RELEASE.md --latest
+          fi

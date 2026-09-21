@@ -1,234 +1,87 @@
-# Komari Next Pro
+<p align="center"><img src="docs/brand/cover.png" alt="Komari Next Pro — A glass theme for Komari" width="100%"></p>
 
-Komari Next Pro 是一个 Komari 自定义主题，在 komari-next 的基础上深度重构，重新优化设计，深度重构，开发许多有趣功能的主题。
+<p align="center"><b>你的节点，你的网络，一眼看清。</b><br>玻璃卡片 · 全球节点 · 网络对比 · 个性化外观</p>
+<p align="center"><a href="README.en.md">English</a> · <a href="https://github.com/fanchengliu/komari-next-pro/releases">下载</a> · <a href="docs/INSTALL.md">安装</a> · <a href="docs/EXTENSION.md">配套扩展</a> · <a href="docs/MIGRATION.md">升级与回退</a></p>
 
-## 项目简介
+# Komari Next Pro 
 
-本仓库分为两个模块：
+Komari Next Pro 3.0 是本仓库的全新独立重写版本。当前前端、数据适配和配套服务采用独立的 React + TypeScript 实现；旧版代码和发布记录保留在 Git 历史中。
 
-- `theme/` —— Komari 前端主题（含源码与编译产物）
-- `unlock-probe/` —— 可选后端，用于流媒体解锁探测与节点卡片字段配置
+一个主题，从日常展示到节点巡检：看运行状态、比较线路、回看网络历史，再把整个界面调成自己的样子。
 
-你可以只使用主题，也可以把主题和后端一起部署，获得完整体验。
+![节点概览](docs/images/overview.png)
 
-## 功能特性
+## 有什么
 
-### 主题部分
-- 现代化主页与 dashboard 布局
-- 重做的节点卡片与详情页
-- 更丰富的 IP 信息与网络质量展示
-- 资产统计与更强的视觉表现
-- 可接入 Komari admin 的主题配置支持
-- 更好的公开展示隐私管理
-- 多语言 UI 基础
+| 功能 | 你可以做的事 |
+| --- | --- |
+| 日常与紧凑布局 | 卡片展示、表格巡检、手机布局，按节点名称和分组筛选 |
+| 网络历史 | 查看延迟/丢包时间格，悬停、选择时段、展开完整曲线 |
+| 节点对比 | 最多四台节点的基础信息与同时间窗口网络对比 |
+| 全球节点 | 可旋转地球、逐节点国旗、节点列表联动；地理位置为地区示意 |
+| 资产与到期 | 免费/付费筛选、长期节点、到期时间线、自动参考汇率 |
+| 个性化 | 卡片透明度、配色、图片/视频背景、首次配置向导 |
+| 概览弹窗 | 世界时钟、在线节点、流量、速率、资产和首页地球 |
+| 五种语言 | 简体中文、繁體中文、English、日本語、한국어 |
 
-### 2.0 新增功能
+<table><tr><td><img src="docs/images/globe.png" alt="全球节点"></td><td><img src="docs/images/network.png" alt="网络总览"></td></tr><tr><td>点亮你的节点地图</td><td>在同一时间窗口比较线路</td></tr></table>
 
-- 🎭 **心情与养成系统** — 根据实时负载显示心情表情，根据运行天数赋予 Lv1~Lv6 成长等级徽章与经验进度条
-- 💰 **资产计算器增强** — 多币种实时汇率转换，弹窗自适应高度，按剩余价值排序
-- 📊 **主界面状态栏优化** — 重新设计的顶部状态栏，支持展开查看在线统计、地区分布、流量总览、网络速率等详细信息
-- 📈 **月度流量精度** — 从整数升级为一位小数（如 28.3 GB / 10.0 TB）
-- 🌐 **IP 质量检测优化** — 服务器详情页 IP 信息接入第三方 API，展示 IP 纯净度、风险评分与黑名单命中情况
-- 🖥️ **本地服务快照** — 服务器详情页新增服务监控面板，实时查看节点服务状态与日志
-- 📱 **移动端适配** — 卡片布局、状态栏、弹窗全面适配移动端
+## 安装
 
-### 可选 unlock-probe 后端
-- 支持手动触发流媒体解锁检测
-- 展示最近一次缓存结果
-- IPv4 / IPv6 分离显示
-- 支持每节点卡片字段显隐配置
-- 支持定时批量检测
-- 写操作需登录，公开结果可脱敏输出
-- 对敏感解锁详情提供更适合公开访问的隐私保护展示
+1. 在 [Releases](https://github.com/fanchengliu/komari-next-pro/releases) 下载 `komari-next-pro-3.0.0-theme.zip`。
+2. 到 Komari 管理后台上传主题 ZIP，选择 **Komari Next Pro**。
+3. 返回首页，通过首次配置向导选择布局与背景。
 
-## 仓库结构
+下载自动生成的 GitHub “Source code” ZIP 不能代替可安装主题包。已有 komari-ds 用户的安装标识仍为 `komari-ds`，配置与扩展路径保持兼容；Next Pro 用户请先阅读 [迁移说明](docs/MIGRATION.md)。
 
-```text
-.
-├── theme/
-│   ├── src/              # 主题源码
-│   ├── dist/             # 编译产物（可直接部署）
-│   ├── komari-theme.json # 主题配置文件
-│   └── preview.png       # 预览图
-├── unlock-probe/
-├── docs/
-├── scripts/
-├── README.md
-├── README-CN.md
-├── SECURITY.md
-├── .env.example
-└── docker-compose.yml
+**只装主题就能使用核心监控、图表、对比与地球。** 服务端媒体库、远程媒体下载和手动节点检测使用可选配套扩展，见 [扩展部署](docs/EXTENSION.md)。
+
+## 数据说明
+
+- 界面展示来自 Komari 的实际数据；README 截图使用明确的合成演示数据。
+- IP 参考分是可查看依据的规则估算，没有随机扰动，**不是实际信誉检测或风险概率**。真实质量源指标另行展示，需要相应服务端配置。
+- 流媒体面板展示 HTTP 探测证据，可访问不等于账号或地区完全解锁。
+- 自动汇率是最新公布的参考值，带日期与缓存状态，不是秒级交易报价。
+- 历史流量受后端保留范围与采样精度约束，未知不填零。详见 [数据口径](docs/DATA.md)。
+
+## 本地开发
+
+需要 Node.js **24.15+（24 或 26）**。Windows PowerShell 如拦截 npm.ps1，请使用 `npm.cmd`。
+
+```sh
+npm ci --ignore-scripts
+npm run demo
+# 另开终端
+npm run dev
 ```
 
-## 快速开始
+打开 `http://127.0.0.1:5173`，演示登录 `demo / demo`。演示服务仅监听本机，合成 IP 使用文档示例网段。
 
-### 方案 A：直接使用编译产物（推荐）
-
-下载 [最新 Release](https://github.com/fanchengliu/komari-next-pro/releases) 中的 `komari-next-pro-v2.0.0.tar.gz`，解压到 Komari 主题目录即可：
-
-```bash
-tar xzf komari-next-pro-v2.0.0.tar.gz -C /path/to/komari/data/theme/
-```
-
-或者直接使用仓库中的 `theme/dist/` 目录：
-
-```bash
-cp -r theme/dist /path/to/komari/data/theme/komari-next-pro/dist
-cp theme/komari-theme.json /path/to/komari/data/theme/komari-next-pro/
-cp theme/preview.png /path/to/komari/data/theme/komari-next-pro/
-```
-
-### 方案 B：从源码构建
-
-```bash
-cd theme
-npm install
+```sh
+npm test
 npm run build
+npx playwright install chromium
+npm run test:e2e
+npm run package
 ```
 
-构建完成后，将产物与 `theme/komari-theme.json` 一起上传到 Komari 的主题目录。
+Windows 默认使用 Edge；可通过 `DS_BROWSER` 指定 Chromium 路径。Linux/macOS 使用 Playwright 安装的 Chromium。产物位于 `releases/`，含主题、源码、扩展与 SHA-256 清单。
 
-### 方案 C：主题 + unlock-probe 一起部署
-
-如果你需要流媒体解锁展示、缓存结果和节点卡片字段控制：
-
-1. 构建并部署 `theme/`
-2. 部署 `unlock-probe/`
-3. 使用反向代理把 `/unlock-probe/` 转发到后端
-4. 配置环境变量，例如：
-   - `KOMARI_BASE`
-   - `KOMARI_USER`
-   - `KOMARI_PASS`
-   - `UNLOCK_PROBE_PORT`
-
-你也可以直接使用仓库中的 `docker-compose.yml` 启动后端。
-
-## Theme 模块
-
-`theme/` 目录是 Komari 主题本体。
-
-主要目标：
-- 优化首页展示
-- 重做节点卡片与详情页 UI
-- 提供更丰富的 IP / 网络质量信息
-- 支持与 companion probe 后端联动
-
-构建方式：
-
-```bash
-cd theme
-npm install
-npm run build
-```
-
-## Unlock Probe 模块
-
-`unlock-probe/` 目录是可选后端服务。
-
-主要职责：
-- 执行探测流程
-- 提供最近一次缓存解锁结果
-- 管理卡片字段显隐配置
-- 支持定时批量执行
-
-示例启动方式：
-
-```bash
-cd unlock-probe
-PORT=19116 \
-KOMARI_BASE=http://127.0.0.1:25774 \
-KOMARI_USER=admin \
-KOMARI_PASS=change-me \
-node server.mjs
-```
-
-## 一键安装 unlock-probe
-
-你可以直接通过 Release 附件安装可选的 unlock-probe 后端：
-
-```bash
-curl -fsSL -o install-unlock-probe.sh https://raw.githubusercontent.com/fanchengliu/komari-next-pro/main/scripts/install-unlock-probe.sh
-bash install-unlock-probe.sh
-```
-
-也支持通过环境变量覆盖参数，例如：
-
-```bash
-INSTALL_DIR=/opt/komari-next-pro-unlock-probe \
-KOMARI_BASE=http://127.0.0.1:25774 \
-KOMARI_USER=admin \
-KOMARI_PASS='你的密码' \
-UNLOCK_PROBE_PORT=19116 \
-bash install-unlock-probe.sh
-```
-
-## 部署说明
-
-### 反向代理
-
-仓库中提供了一个最小 Nginx 示例：
+## 项目结构
 
 ```text
-docs/nginx-example.conf
+apps/theme/       React 主题、RPC 客户端与界面
+apps/extension/   独立媒体库、汇率缓存与手动检测
+packages/         共享配置与数据规则
+tests/            数据、服务和浏览器场景
+deploy/           systemd、Nginx 与 Docker 示例
+docs/             安装、迁移、数据与素材来源
 ```
 
-### 定时任务
+兼容验证基线：Komari **1.5.0**。没有直接查询 Komari 内部 SQL 表。配套服务写操作验证登录身份、Origin 与 CSRF，检测不自动运行。
 
-systemd timer 参考说明位于：
+## 贡献与许可
 
-```text
-docs/systemd-timers.md
-```
+欢迎提交问题与 PR，见 [贡献指南](CONTRIBUTING.md) 和 [安全反馈](SECURITY.md)。
 
-## 部分截图展示
-
-### 主页状态栏细节
-
-![主页状态栏细节](./docs/images/status-bar-detail.jpg)
-
-### 子页本地服务快照
-
-![子页本地服务快照](./docs/images/local-service-snapshot.jpg)
-
-### 心情与等级系统
-
-![心情与等级系统](./docs/images/mood-level-system.jpg)
-
-### 首页 dashboard
-
-![首页 dashboard](./docs/images/homepage-dashboard.jpg)
-
-### 实例状态页
-
-![实例状态页](./docs/images/instance-status.jpg)
-
-### IP 信息与流媒体解锁
-
-![IP 信息与流媒体解锁](./docs/images/ip-info-unlock.jpg)
-
-### IPv4 / IPv6 解锁结果展示
-
-![IPv4 / IPv6 解锁结果展示](./docs/images/stream-unlock-ipv6.jpg)
-
-### 卡片隐私与显示设置
-
-![卡片隐私与显示设置](./docs/images/card-privacy-settings.jpg)
-
-## 当前状态
-
-仓库完整开源。  
-不断优化改进。
-
-### Next Pro v2 维护补丁
-
-`theme/patches/` 保留面向 Next Pro v2 正式版的独立兼容补丁。当前卡片指标补丁用于统一延迟与丢包行的布局，并避免月度流量长数值撑宽或溢出节点卡片。
-
-## 贡献者
-
-- OpenClaw
-- Claude
-- Codex
-
-## License
-
-见 [LICENSE](./LICENSE)。
+代码采用 [MIT License](LICENSE)。原项目版权声明保留；地图数据库、图标及依赖遵循各自许可，详见 [来源说明](docs/PROVENANCE.md)、[地图许可](docs/GEODATA.md) 和 [第三方许可](docs/THIRD_PARTY_NOTICES.md)。默认背景与品牌素材为本项目新制作，不包含个人站点的动漫媒体或私人部署资料。

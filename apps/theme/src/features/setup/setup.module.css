@@ -1,0 +1,121 @@
+.steps {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 23px;
+  overflow: auto;
+}
+.steps button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 8px;
+}
+.steps button span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #7d92b21a;
+  font-size: 10px;
+}
+.steps button[aria-current="step"] {
+  color: var(--accent);
+}
+.steps button[aria-current="step"] span {
+  background: var(--accent);
+  color: white;
+}
+.presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.preset {
+  display: block;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  border-radius: 18px;
+  box-shadow: none;
+}
+.preset > svg {
+  color: var(--accent);
+}
+.preset strong {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 14px;
+}
+.preset small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 13px;
+}
+.preset[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, var(--panel));
+}
+.thumb {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  background: linear-gradient(135deg, #d9e7f5, #e1d9e2);
+  border-radius: 11px;
+  padding: 18px;
+  margin-top: 16px;
+  min-height: 120px;
+}
+.thumb i {
+  border: 1px solid #fff8;
+  background: #ffffffa8;
+  border-radius: 7px;
+  min-height: 28px;
+}
+.thumb[data-preset="inspection"] {
+  grid-template-columns: 1fr;
+  gap: 4px;
+  background: #e8eff2;
+}
+.thumb[data-preset="inspection"] i {
+  min-height: 10px;
+}
+.thumb[data-preset="night"] {
+  background: #1b2a40;
+}
+.thumb[data-preset="night"] i {
+  background: #66759035;
+  border-color: #8e9db331;
+}
+@media (max-width: 720px) {
+  .presets {
+    grid-template-columns: 1fr;
+  }
+  .preset {
+    padding: 16px;
+  }
+  .thumb {
+    min-height: 95px;
+  }
+  .steps {
+    gap: 2px;
+  }
+  .steps button {
+    font-size: 10px;
+    padding: 5px;
+  }
+  .steps button span {
+    width: 19px;
+    height: 19px;
+  }
+}

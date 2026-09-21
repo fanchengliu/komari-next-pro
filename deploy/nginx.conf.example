@@ -1,0 +1,18 @@
+# Add these locations to the existing virtual host. Keep existing native admin/terminal and sw.js fixes.
+location ^~ /komari-ds-api/ {
+    proxy_pass http://127.0.0.1:5175;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    client_max_body_size 101m;
+    proxy_read_timeout 310s;
+    proxy_request_buffering off;
+}
+# Serve through Komari, which returns 404 for missing assets (verified on 1.5.0).
+location ^~ /themes/komari-ds/dist/ {
+    proxy_pass http://127.0.0.1:25774;
+    proxy_set_header Host $host;
+    proxy_hide_header Cache-Control;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Cache-Control "public, max-age=3600";
+}
+# Inherit the existing root proxy and native route configuration. Do not replace the full virtual host.
