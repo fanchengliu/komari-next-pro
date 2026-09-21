@@ -41,7 +41,14 @@ try {
     await page.waitForLoadState("networkidle");
     if (r.status() !== 200 || (await page.locator("h1").count()) !== 1)
       throw Error("Page failed " + path);
-    await page.locator("img").evaluateAll(async images=>{await Promise.all(images.map(image=>{image.loading="eager";return image.decode().catch(()=>{});}));});
+    await page.locator("img").evaluateAll(async (images) => {
+      await Promise.all(
+        images.map((image) => {
+          image.loading = "eager";
+          return image.decode().catch(() => {});
+        }),
+      );
+    });
     const broken = await page
       .locator("img")
       .evaluateAll((imgs) =>
@@ -57,8 +64,14 @@ try {
   await page.getByRole("button", { name: "搜索文档", exact: true }).click();
   const search = page.locator(".VPLocalSearchBox input");
   await search.fill("卡片透明度");
-  await page.locator('.VPLocalSearchBox a[href^="/guide/appearance"]').first().waitFor();
-  await page.locator('.VPLocalSearchBox a[href^="/guide/appearance"]').first().click();
+  await page
+    .locator('.VPLocalSearchBox a[href^="/guide/appearance"]')
+    .first()
+    .waitFor();
+  await page
+    .locator('.VPLocalSearchBox a[href^="/guide/appearance"]')
+    .first()
+    .click();
   await page.waitForURL(/appearance/);
   checks.push("Local search navigates to card transparency");
   await page.goto(origin);
@@ -74,6 +87,22 @@ try {
     throw Error("Theme preference lost");
   await page.locator(".VPSwitchAppearance:visible").click();
   checks.push("Appearance switch persists");
+  await page.goto(origin + "/en/faq");
+  const chineseLink = page
+    .locator(".VPNavBarTranslations a")
+    .filter({ hasText: "简体中文" })
+    .first();
+  if ((await chineseLink.getAttribute("href")) !== "/")
+    throw Error("Language switch points to a missing translated route");
+  await page.goto(origin + "/guide/appearance");
+  const englishLink = page
+    .locator(".VPNavBarTranslations a")
+    .filter({ hasText: "English" })
+    .first();
+  if ((await englishLink.getAttribute("href")) !== "/en/")
+    throw Error("English language switch points to a missing route");
+  checks.push("Language switch uses valid locale homepages");
+  await page.goto(origin);
   await page.screenshot({ path: ".local/docs-check/home.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin);
