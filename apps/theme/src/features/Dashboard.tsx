@@ -141,6 +141,7 @@ function DashboardContent() {
         </label>
         <button
           className={S.count}
+          aria-pressed={ui.online === "online"}
           onClick={() =>
             ui.set({ online: ui.online === "online" ? "all" : "online" })
           }
@@ -155,9 +156,10 @@ function DashboardContent() {
         </button>
         <div className={S.groups}>
           <span>{t("分组")}</span>
-          <div>
+          <div role="group" aria-label={t("分组")}>
             <button
               className={!ui.group ? S.active : ""}
+              aria-pressed={!ui.group}
               onClick={() => ui.set({ group: "" })}
             >
               {t("全部")}
@@ -167,6 +169,7 @@ function DashboardContent() {
                 <button
                   key={g}
                   className={ui.group === g ? S.active : ""}
+                  aria-pressed={ui.group === g}
                   onClick={() => ui.set({ group: g })}
                 >
                   {g}

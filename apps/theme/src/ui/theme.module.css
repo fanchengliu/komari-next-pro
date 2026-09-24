@@ -1604,6 +1604,76 @@
 }
 .filterPanel {
   border-radius: 20px;
+  transition: box-shadow 180ms ease;
+}
+.filterPanel:focus-within {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent),
+    0 8px 26px #163f6920;
+}
+.filterPanel .search,
+.filterPanel .count,
+.filterPanel .groups button {
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+.filterPanel .search {
+  cursor: text;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+.filterPanel .search:focus-within {
+  color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background: var(--panel);
+}
+.filterPanel .count {
+  color: var(--muted);
+}
+.filterPanel .count[aria-pressed="true"],
+.filterPanel .groups button[aria-pressed="true"] {
+  color: var(--accent);
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.filterPanel .groups button:focus-visible {
+  outline-offset: -2px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .filterPanel:hover {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--accent) 32%, transparent),
+      0 8px 26px #163f6920;
+  }
+  .filterPanel .search:hover {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  .filterPanel .count:hover,
+  .filterPanel .groups button:hover {
+    color: var(--accent);
+    background: var(--panel);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-1px);
+  }
+}
+.filterPanel .count:active,
+.filterPanel .groups button:active {
+  transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .filterPanel,
+  .filterPanel .search,
+  .filterPanel .count,
+  .filterPanel .groups button {
+    transition: none;
+  }
+  .filterPanel .count:is(:hover, :active),
+  .filterPanel .groups button:is(:hover, :active) {
+    transform: none;
+  }
 }
 @media (max-width: 650px) {
   .filterPanel {
