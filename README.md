@@ -5,7 +5,7 @@
 
 # Komari Next Pro 
 
-Komari Next Pro 3.0 是本仓库的全新独立重写版本。当前前端、数据适配和配套服务采用独立的 React + TypeScript 实现；旧版代码和发布记录保留在 Git 历史中。
+Komari Next Pro 3.0 是本仓库的全新独立版本。当前前端、数据适配和配套服务采用独立的 React + TypeScript 实现；旧版代码和发布记录保留在 Git 历史中。
 
 一个主题，从日常展示到节点巡检：看运行状态、比较线路、回看网络历史，再把整个界面调成自己的样子。
 
