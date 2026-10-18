@@ -78,7 +78,7 @@ deploy/           systemd、Nginx 与 Docker 示例
 docs/             安装、迁移、数据与素材来源
 ```
 
-兼容验证基线：Komari **1.5.0**。没有直接查询 Komari 内部 SQL 表。配套服务写操作验证登录身份、Origin 与 CSRF，检测不自动运行。
+
 
 ## 贡献与许可
 
