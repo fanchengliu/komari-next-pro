@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.2
+
+- Move home-card monitoring scope and history duration into accessible hover descriptions; keep latency/loss charts and task selection unchanged.
+- Replace large layout illustrations with compact choices grouped by desktop and mobile, explicit preview/apply states, and responsive live-node previews.
+- Keep desktop and mobile draft choices independent so a previous mobile preview cannot accidentally redirect a desktop preference change.
+- Add translations and browser coverage for scope explanations, device-specific persistence, keyboard controls and narrow screens.
+
 ## 3.0.1
 
 - Add the repository icon/link beside the fixed Komari Next Pro footer.

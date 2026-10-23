@@ -153,6 +153,9 @@ export const PingSummaryBars = memo(function PingSummaryBars({
     [lines, batch?.window],
   );
   const summary = useMemo(() => combineSummary(lines), [lines]);
+  const hours = batch ? (batch.window.end - batch.window.start) / 3600000 : 1;
+  const scopeDescription = `${t("统计范围")}：${new Intl.NumberFormat(batch?.locale, { maximumFractionDigits: 1 }).format(hours)} ${t("小时")} · ${t("监测任务")}：${selection.taskIds.length}${selection.names.length ? `\n${selection.names.join(" / ")}` : ""}`;
+  const descriptionId = `${key}-scope`;
   const openBucket = (bucket?: TimeBucket) => {
     setTip(null);
     open({
@@ -165,16 +168,9 @@ export const PingSummaryBars = memo(function PingSummaryBars({
   };
   return (
     <div ref={ref} className={V.strip} data-ping-node={nodeId}>
-      <div className={V.stripScope}>
-        <span title={selection.names.join(" / ")}>
-          {selection.names.length === 1
-            ? selection.names[0]
-            : `${t(selection.scope === "tcp" ? "TCP 线路" : selection.scope === "custom" ? "自选线路" : "全部线路")} · ${selection.names.length}`}
-        </span>
-        <span>
-          {batch ? (batch.window.end - batch.window.start) / 3600000 : 1} h
-        </span>
-      </div>
+      <span id={descriptionId} className={V.srOnly}>
+        {scopeDescription}
+      </span>
       {batch?.error ? (
         <div className={V.stripError}>
           <span>{t("网络历史暂不可用")}</span>
@@ -203,6 +199,8 @@ export const PingSummaryBars = memo(function PingSummaryBars({
                 );
               }}
               aria-label={`${t(kind === "latency" ? "延迟" : "丢包")} · ${t("打开监测详情")}`}
+              aria-describedby={descriptionId}
+              title={scopeDescription}
             >
               <div className={V.stripHead}>
                 <span>

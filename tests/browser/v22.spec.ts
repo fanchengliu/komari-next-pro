@@ -102,7 +102,9 @@ test("legacy hidden task selection cannot make automatic home summaries show onl
   await page.goto("/");
   const card = page.locator('[data-ping-node="demo-005"]');
   await card.scrollIntoViewIfNeeded();
-  await expect(card).toContainText("TCP");
+  await expect(
+    card.getByRole("button", { name: "延迟 · 打开监测详情", exact: true }),
+  ).toHaveAttribute("title", /监测任务：6/);
   await expect(
     card.getByRole("button", { name: "延迟 · 打开监测详情", exact: true }),
   ).not.toContainText("1 ms");
@@ -136,7 +138,9 @@ test("legacy hidden task selection cannot make automatic home summaries show onl
     .getByRole("button", { name: "恢复首页默认线路", exact: true })
     .click();
   await page.keyboard.press("Escape");
-  await expect(card).toContainText("TCP");
+  await expect(
+    card.getByRole("button", { name: "延迟 · 打开监测详情", exact: true }),
+  ).toHaveAttribute("title", /监测任务：6/);
 });
 
 test("IP and network values are centered, card hints are not repeated, IPv6-only data and zero abuse ratio render correctly", async ({
